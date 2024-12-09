@@ -8,46 +8,12 @@
 <a
     href={path}
     onclick={() => activePage.name = name }
-    class={isActive ? "nav-button-selected" : "nav-button"}
+    class={`flex justify-center items-center h-4/5 w-1/5 ${isActive ? 'text-accent-color' : 'text-text-color'}`}
 >
-    <img src="/navbar/{isActive ? name + "-selected" : name}.png" alt={name} class="nav-button-icon" />
+    <img 
+        src={`/navbar/${isActive ? name + "-selected" : name}.png`} 
+        alt={name} 
+        class="w-6 h-6 m-1"
+    />
     {name}
 </a>
-
-<style>
-    .nav-button {
-        color: var(--text-color);
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 80%;
-        width: 20%;
-    }
-
-    .nav-button-selected {
-        color: var(--accent-color);
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 80%;
-        width: 20%;
-    }
-
-    .nav-button-icon {
-        width: 24px;
-        height: 24px;
-        margin: 4px;
-    }
-
-    a {
-        text-decoration: none;
-        color: inherit;
-        font-family: "Helvetica", cursive;
-
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-</style>
