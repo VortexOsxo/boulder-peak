@@ -1,13 +1,13 @@
 <script lang="ts">
-    import { activePage } from '../states/active-page.svelte';
+    import { page } from '$app/stores';
 
     let { name, path = name } = $props();
-    let isActive = $derived(activePage.name === name);
+
+    let isActive = $derived($page.url.pathname === ('/'+name));
 </script>
 
 <a
     href={path}
-    onclick={() => activePage.name = name }
     class={`flex justify-center items-center h-4/5 w-1/5 ${isActive ? 'text-accent' : 'text-black'}`}
 >
     <img 
