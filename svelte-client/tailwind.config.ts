@@ -13,7 +13,10 @@ export default {
 				'primarybackgroud': '#212A31',
 				'secondarybackground': '#2E3944',
 				'accent': '#33cccc',
-			}
+			},
+			fontFamily: {
+				helvetica: ['Helvetica', 'Arial', 'sans-serif'],
+			},
 		}
 	},
 
