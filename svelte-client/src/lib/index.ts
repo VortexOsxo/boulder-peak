@@ -1,1 +1,1 @@
-export { checkAuth } from './logics/authentication';
+export { checkAuth, getAuthorizationHeader } from './logics/authentication';

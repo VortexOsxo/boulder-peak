@@ -1,6 +1,5 @@
 <script>
     import { Card } from "flowbite-svelte";
-    import { attemptLogin } from "$lib/logics/authentication";
     import { goto } from "$app/navigation";
 
     let username = "";
@@ -12,14 +11,24 @@
 
         if (!username.trim() || !password.trim()) return;
 
-        const success = await attemptLogin(username, password);
-        if (success) goto('/home');
+        const response = await fetch("http://127.0.0.1:5000/auth/signup", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password }),
+        });
+
+        if (response.ok) goto('/login');
     }
+
 </script>
 
 <div class="flex items-center justify-center h-screen">
     <Card class="flex items-center justify-center bg-secondarybackground">
-        <h5 class="mb-4 text-2xl font-bold tracking-tight text-text">Log in</h5>
+        <h5 class="mb-4 text-2xl font-bold tracking-tight text-text">
+            Sign up
+        </h5>
 
         <form on:submit={onSubmit}>
             <!-- Username Field -->
@@ -59,7 +68,7 @@
                 type="submit"
                 class="w-full py-2 px-4 bg-accent text-sky-950 font-semibold rounded-lg focus:ring-accent focus:ring-2"
             >
-                Log in
+                Sign up
             </button>
         </form>
     </Card>
