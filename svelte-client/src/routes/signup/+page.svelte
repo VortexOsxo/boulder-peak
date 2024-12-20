@@ -25,7 +25,7 @@
 </script>
 
 <div class="flex items-center justify-center h-screen">
-    <Card class="flex items-center justify-center bg-secondarybackground">
+    <Card class="flex items-center justify-center bg-secondary-background">
         <h5 class="mb-4 text-2xl font-bold tracking-tight text-text">
             Sign up
         </h5>
@@ -43,7 +43,7 @@
                     name="username"
                     bind:value={username}
                     required
-                    class="mt-2 p-2 w-full bg-primarybackgroud rounded-lg"
+                    class="mt-2 p-2 w-full bg-primary-backgroud rounded-lg"
                 />
             </div>
 
@@ -59,7 +59,7 @@
                     name="password"
                     bind:value={password}
                     required
-                    class="mt-2 p-2 w-full bg-primarybackgroud rounded-lg"
+                    class="mt-2 p-2 w-full bg-primary-backgroud rounded-lg"
                 />
             </div>
 

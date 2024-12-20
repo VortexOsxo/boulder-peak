@@ -2,7 +2,7 @@ import { goto } from '$app/navigation';
 
 export function checkAuth() {
     const token = sessionStorage.getItem("auth_token");
-    if (token === null) goto("/login");
+    // if (token === null) goto("/login");
 }
 
 export function getAuthorizationHeader() {

@@ -1,1 +1,1 @@
-export { checkAuth, getAuthorizationHeader } from './logics/authentication';
+export { checkAuth, getAuthorizationHeader } from './stores/authentication';

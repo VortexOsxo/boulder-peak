@@ -1,7 +1,12 @@
 <script lang="ts">
-    let exercises: string[] = ["dumbell curl", "pull up"];
+  import ExerciseHeader from "./exercise-header.svelte";
+  import { exercises } from "../stores/exercise-list";
+    import ExerciseListHeader from "./exercise-list-header.svelte";
+
 </script>
 
-{#each exercises as e}
-    <li>e</li>
+<ExerciseListHeader />
+
+{#each $exercises as exercise}
+  <ExerciseHeader {exercise} />
 {/each}
