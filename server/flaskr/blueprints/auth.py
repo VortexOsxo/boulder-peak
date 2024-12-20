@@ -4,6 +4,7 @@ from flask import Blueprint, g, request, jsonify, current_app
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime, timedelta
 from flaskr.db import get_db
+from pymongo.errors import DuplicateKeyError
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -32,15 +33,16 @@ def signup():
     password = data.get('password')
 
     db = get_db()
+    users_collection = db['users']
 
     try:
-        db.execute(
-            'INSERT INTO user (username, password) VALUES (?, ?)',
-            (username, generate_password_hash(password)),
-        )
-        db.commit()
-    except db.IntegrityError:
+        users_collection.insert_one({
+            'username': username,
+            'password': generate_password_hash(password)
+        })
+    except DuplicateKeyError:
         return f'User {username} is already registered', 400 
+
     return f'Account created for {username}', 201
 
 @auth_bp.route('/login', methods=('GET', 'POST')) # TODO : change for post
@@ -51,17 +53,18 @@ def login():
     password = data.get('password')
 
     db = get_db()
-    user = db.execute(
-        'SELECT * FROM user WHERE username = ?', (username,)
-    ).fetchone()
+    users_collection = db['users']
+    user = users_collection.find_one({"username": username})
+
+    print(user)
 
     if user is None:
         return jsonify({'error': 'Incorrect username'}), 401
-    elif not check_password_hash(user[2], password):
+    elif not check_password_hash(user['password'], password):
         return jsonify({'error': 'Incorrect password'}), 401
     
     token = jwt.encode({
-        'user_id': user[0],
+        'user_id': str(user['_id']),
         'exp': datetime.utcnow() + timedelta(hours=3)
     }, current_app.config['SECRET_KEY'], algorithm='HS256')
 

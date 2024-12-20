@@ -1,6 +1,8 @@
-import sqlite3
-from flask import current_app, g
+from flask import g
 import click
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
+from env import mongo_username, mongo_password
 
 def get_db():
     if 'db' not in g:
@@ -9,20 +11,19 @@ def get_db():
     return g.db
 
 def _create_db():
-    g.db = sqlite3.connect(current_app.config['DATABASE'])
-
+    uri = f"mongodb+srv://{mongo_username}:{mongo_password}@cluster0.t8rhv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+    client = MongoClient(uri, server_api=ServerApi('1'))
+    g.db = client['database']
+    
 def close_db(e=None):
     db = g.pop('db', None)
-
     if db is not None:
-        db.close()
+        db.client.close()
 
 def init_db():
     db = get_db()
-
-    with current_app.open_resource('schema.sql') as f:
-        db.executescript(f.read().decode('utf8'))
-
+    users_collection = db['users']
+    users_collection.create_index([("username", 1)], unique=True)
 
 @click.command('init-db')
 def init_db_command():
