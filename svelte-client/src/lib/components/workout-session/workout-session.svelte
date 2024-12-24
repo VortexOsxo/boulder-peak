@@ -1,6 +1,7 @@
 <script>
     import WorkoutCurrentExercise from "./workout-current-exercise.svelte";
 import WorkoutExercicesList from "./workout-exercices-list.svelte";
+    import WorkoutTimerWindow from "./workout-timer-window.svelte";
 
 </script>
 <h1>
@@ -8,3 +9,4 @@ import WorkoutExercicesList from "./workout-exercices-list.svelte";
 </h1>
 <WorkoutExercicesList />
 <WorkoutCurrentExercise />
+<WorkoutTimerWindow />
