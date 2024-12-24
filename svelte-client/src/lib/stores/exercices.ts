@@ -1,13 +1,14 @@
+import type { Exercise } from '$lib/interfaces/exercise';
 import { get, writable } from 'svelte/store';
 
-export const exercises = writable([
-    { name: "Dumbbell Curl", repetitions: 10, sets: 3, weight: 10 },
-    { name: "Pull Up", repetitions: 10, sets: 3, weight: 0 }
+export const exercises = writable<Exercise[]>([
+    { name: "Dumbbell Curl", reps: 10, sets: 3, weight: 10 },
+    { name: "Pull Up", reps: 10, sets: 3, weight: 0 }
 ]);
 
 export function addExerciseByName(exerciseName: string) {
     if (get(exercises).find(exercise => exercise.name === exerciseName)) return; 
-    const exercise = { name: exerciseName, repetitions: 10, sets: 3, weight: 50 };
+    const exercise = { name: exerciseName, reps: 10, sets: 3, weight: 50 };
     exercises.update(exerciseList => [...exerciseList, exercise]);
 }
 

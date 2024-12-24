@@ -3,6 +3,9 @@
     import { getAuthorizationHeader } from "$lib";
     import ExerciseList from "$lib/components/exercise-list.svelte";
     import { workoutState } from "$lib/stores/workout";
+    import WorkoutSession from "$lib/components/workout-session/workout-session.svelte";
+    import { exercises } from "$lib/stores/exercices";
+    import { get } from "svelte/store";
 
     let message = "";
 
@@ -12,6 +15,14 @@
             headers: { Authorization: getAuthorizationHeader() },
         }).then((response) => response.text().then((text) => (message = text))),
     );
+
+    function startWorkout() {
+        workoutState.inWorkout = true;
+        let exercisesArray = get(exercises);
+        if (exercisesArray.length > 0)
+            workoutState.currentExercise.set(exercisesArray[0]);
+    }
+
 </script>
 
 {#if !workoutState.inWorkout}
@@ -19,10 +30,10 @@
 
     <button
         class="fixed bottom-32 left-1/2 transform -translate-x-1/2 z-25 bg-accent text-black px-4 py-2 rounded"
-        onclick={() => (workoutState.inWorkout = true)}
+        onclick={startWorkout}
     >
         Start Workout
     </button>
 {:else}
-    <h2>Workout Session</h2>
+    <WorkoutSession />
 {/if}

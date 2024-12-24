@@ -1,5 +1,5 @@
 <script>
-  import { exercises } from "../stores/exercise-list";
+  import { exercises } from "../stores/exercices";
   import { derived } from "svelte/store";
   import AddExerciseWindow from "./sliding-window.svelte";
   import ExerciseSelecter from "./exercise-selecter.svelte";
