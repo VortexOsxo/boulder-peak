@@ -19,16 +19,16 @@
         updateTimerValue(-1);
     }
 
+    // @ts-ignore
     function updateTimerValue(value) {
         timerValue += value;
-        if (timerValue < 0) {
+        if (timerValue <= 0) {
             timerValue = 0;
             clearInterval(timerInterval);
             timerInterval = 0;
         } else if (timerValue > 0 && !timerInterval) {
             timerInterval = setInterval(onTick, 1000);
         }
-
         setTimerValue();
     }
 
