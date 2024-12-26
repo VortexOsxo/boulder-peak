@@ -1,6 +1,8 @@
 import type { Exercise } from '$lib/interfaces/exercise';
 import { get, writable } from 'svelte/store';
 
+export const selectedExercises = new Set<string>();
+
 export const exercises = writable<Exercise[]>([
     { name: "Dumbbell Curl", reps: 10, sets: 3, weight: 10 },
     { name: "Pull Up", reps: 10, sets: 3, weight: 0 }
