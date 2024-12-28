@@ -1,26 +1,22 @@
 <script>
-    import { onMount } from "svelte";
-    import { getAuthorizationHeader } from "$lib";
     import ExerciseList from "$lib/components/exercise-list.svelte";
-    import { workoutState } from "$lib/stores/workout";
+    import { workoutState, logWorkout } from "$lib/stores/workout";
     import WorkoutSession from "$lib/components/workout-session/workout-session.svelte";
     import { exercises } from "$lib/stores/exercices";
     import { get } from "svelte/store";
-
-    let message = "";
-
-    onMount(() =>
-        fetch("http://127.0.0.1:5000/training/", {
-            method: "GET",
-            headers: { Authorization: getAuthorizationHeader() },
-        }).then((response) => response.text().then((text) => (message = text))),
-    );
+    import { goto } from "$app/navigation";
 
     function startWorkout() {
         workoutState.inWorkout = true;
         let exercisesArray = get(exercises);
         if (exercisesArray.length > 0)
             workoutState.currentExercise.set(exercisesArray[0]);
+    }
+
+    function stopWorkout() {
+        workoutState.inWorkout = false;
+        logWorkout();
+        goto("history");
     }
 
 </script>
@@ -36,4 +32,10 @@
     </button>
 {:else}
     <WorkoutSession />
+    <button
+        class="fixed bottom-32 left-1/2 transform -translate-x-1/2 z-25 bg-accent text-black px-4 py-2 rounded"
+        onclick={stopWorkout}
+    >
+        Complete Workout
+    </button>
 {/if}
