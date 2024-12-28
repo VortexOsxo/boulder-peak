@@ -2,6 +2,7 @@ import { writable } from "svelte/store";
 import { defaultExercise, type Exercise } from "$lib/interfaces/exercise";
 import { defaultSet, type Set } from "$lib/interfaces/set";
 import { getAuthorizationHeader } from "./authentication";
+import { fetchlogs } from "./logs";
 
 export const workoutState = {
     inWorkout: false,
@@ -28,7 +29,6 @@ export function addSet(exercise: Exercise): Set[] {
 
 export function logWorkout() {
     const completedDate = new Date();
-    console.log(completedDate);
 
     let completedExercises = [];
     for (let [exercise, sets] of workoutState.completedSets) {
@@ -50,5 +50,5 @@ export function logWorkout() {
             date: completedDate,
             exercises: completedExercises,
         }),
-    }).then((response) => response.text().then(console.log));
+    });
 }

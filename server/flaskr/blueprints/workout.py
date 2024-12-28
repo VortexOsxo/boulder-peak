@@ -20,7 +20,12 @@ def log_workout():
 @workout_bp.route("/", methods=["GET"])
 @login_required
 def get_workjouts():
+    sorts = {'date': -1}
+    sort = request.args.get('sort')
+    if sort not in sorts: sort = 'date'
+
     db = get_db()
     workouts_collection = db['workouts']
-    workouts = workouts_collection.find({'user_id': g.user_id})
-    return {"workouts": list(workouts)}, 200
+    workouts = workouts_collection.find({'user_id': g.user_id}, {'_id': 0}).sort(sort, sorts[sort])
+
+    return list(workouts), 200
