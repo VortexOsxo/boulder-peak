@@ -56,8 +56,6 @@ def login():
     users_collection = db['users']
     user = users_collection.find_one({"username": username})
 
-    print(user)
-
     if user is None:
         return jsonify({'error': 'Incorrect username'}), 401
     elif not check_password_hash(user['password'], password):

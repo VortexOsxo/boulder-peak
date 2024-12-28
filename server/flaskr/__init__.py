@@ -25,8 +25,9 @@ def create_app(test_config=None):
     from . import db
     db.init_app(app)
 
-    from .blueprints import auth_bp, training_bp
+    from .blueprints import auth_bp, training_bp, workout_bp
     app.register_blueprint(auth_bp)
     app.register_blueprint(training_bp)
+    app.register_blueprint(workout_bp)
 
     return app
