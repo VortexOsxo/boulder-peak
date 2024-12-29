@@ -15,18 +15,31 @@ export function getAuthorizationHeader() {
     return `Bearer ${token}`;
 }
 
-export async function attemptLogin(username: string, password: string): Promise<boolean> {
+export async function attemptLogin(username: string, password: string) {
     const response = await fetch(`${serverUrl}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json", },
         body: JSON.stringify({ username, password }),
     });
 
-    if (!response.ok) return false;
-
     const data = await response.json();
+    if (!response.ok) return  { success: false, message: data.error };
+
     const token = data.token;
 
     sessionStorage.setItem("auth_token", token);
-    return true;
+    return { success: true, message: data.error };
+}
+
+export async function attemptSignUp(username: string, password: string) {
+    const response = await fetch(`${serverUrl}/auth/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", },
+        body: JSON.stringify({ username, password }),
+    });
+
+    const data = await response.json();
+    if (!response.ok) return { success: false, message: data.error };
+
+    return { success: true, message: data.error };
 }

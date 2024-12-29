@@ -41,9 +41,9 @@ def signup():
             'password': generate_password_hash(password)
         })
     except DuplicateKeyError:
-        return f'User {username} is already registered', 400 
+        return jsonify({'error': f'User {username} is already registered'}), 400 
 
-    return f'Account created for {username}', 201
+    return jsonify({'error': f'Account created for {username}'}), 201
 
 @auth_bp.route('/login', methods=('GET', 'POST')) # TODO : change for post
 def login():

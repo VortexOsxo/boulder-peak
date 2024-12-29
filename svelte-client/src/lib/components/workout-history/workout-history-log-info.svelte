@@ -17,7 +17,7 @@
     }
 </script>
 
-<div class="p-4 mb-4 text-accent">
+<div class="p-4 mb-4 text-main-text">
     <p>{formatDate(workout.date)}</p>
     <p>{workout.duration} seconds</p>
     <p>{workout.exercises.length} exercises:</p>

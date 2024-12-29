@@ -1,9 +1,12 @@
 <script>
     import { Card } from "flowbite-svelte";
     import { goto } from "$app/navigation";
+    import { attemptSignUp } from "$lib/stores/authentication";
 
     let username = "";
     let password = "";
+
+    let errorMessage = "";
 
     // @ts-ignore
     async function onSubmit(event) {
@@ -11,22 +14,16 @@
 
         if (!username.trim() || !password.trim()) return;
 
-        const response = await fetch("http://127.0.0.1:5000/auth/signup", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ username, password }),
-        });
+        const { success, message } = await attemptSignUp(username, password);
 
-        if (response.ok) goto('/login');
+        if (success) goto("/home");
+        else errorMessage = message;
     }
-
 </script>
 
 <div class="flex items-center justify-center h-screen">
     <Card class="flex items-center justify-center bg-secondary-background">
-        <h5 class="mb-4 text-2xl font-bold tracking-tight text-text">
+        <h5 class="mb-4 text-2xl font-bold tracking-tight text-title-text">
             Sign up
         </h5>
 
@@ -35,7 +32,8 @@
             <div class="mb-4">
                 <label
                     for="username"
-                    class="block text-sm font-medium text-text">Username</label
+                    class="block text-sm font-medium text-main-text"
+                    >Username</label
                 >
                 <input
                     type="text"
@@ -51,7 +49,8 @@
             <div class="mb-4">
                 <label
                     for="password"
-                    class="block text-sm font-medium text-text">Password</label
+                    class="block text-sm font-medium text-main-text"
+                    >Password</label
                 >
                 <input
                     type="password"
@@ -62,6 +61,16 @@
                     class="mt-2 p-2 w-full bg-primary-backgroud rounded-lg"
                 />
             </div>
+
+            <div class="mb-4">
+                <a href="/login"> Have an account ? Log in </a>
+            </div>
+
+            {#if errorMessage}
+                <div class="mb-4">
+                    <p class="text-red-500">{errorMessage}</p>
+                </div>
+            {/if}
 
             <!-- Submit Button -->
             <button

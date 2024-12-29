@@ -12,7 +12,7 @@
     {#if !$logs.length}
         <p>No logs found</p>
     {/if}
-    <h1>History</h1>
+    <h1 class="text-main-text p-4">Past Workouts</h1>
     {#each $logs as workout}
         <WorkoutHistoryLogHeader workout={workout} />
     {/each}
