@@ -1,13 +1,19 @@
 <script lang="ts">
-    import { page } from '$app/stores';
+    import { goto } from '$app/navigation';
+    import { navBarSelected } from './stores/nav-bar-selected';
 
-    let { name, path = name } = $props();
+    let { name } = $props();
 
-    let isActive = $derived($page.url.pathname === ('/'+name));
+    let isActive = $derived($navBarSelected === name);
+
+    function navigate() {
+        navBarSelected.set(name);
+        goto(name);
+    }
 </script>
 
-<a
-    href={path}
+<button
+    onclick="{navigate}"
     class={`flex justify-center items-center h-4/5 w-1/5 ${isActive ? 'text-accent' : 'text-black'}`}
 >
     <img 
@@ -16,4 +22,4 @@
         class="w-6 h-6 m-1"
     />
     <p class="font-helvetica text-lg">{name}</p>
-</a>
+</button>
