@@ -1,12 +1,13 @@
 import { writable } from "svelte/store";
 import { getAuthorizationHeader } from "./authentication";
+import { serverUrl } from "../../env";
 
 export const logs = writable([]);
 
 export const selectedLog = writable(null);
 
 export function fetchlogs() {
-    fetch("http://127.0.0.1:5000/workout/", {
+    fetch(`${serverUrl}/workout/`, {
         method: "GET",
         headers: { Authorization: getAuthorizationHeader() },
     }).then((response) => response.json()).then(logs.set);

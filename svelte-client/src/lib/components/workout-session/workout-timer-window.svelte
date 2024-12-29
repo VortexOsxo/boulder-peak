@@ -1,4 +1,5 @@
 <script>
+    import { formatTimerTime } from "$lib/utils/timer";
     import { writable } from "svelte/store";
 
     let { defaultTimerValue = 120 } = $props();
@@ -10,9 +11,7 @@
     let timerInterval = setInterval(onTick, 1000);
 
     function setTimerValue() {
-        const minutes = String(Math.floor(timerValue / 60)).padStart(1, "0");
-        const seconds = String(timerValue % 60).padStart(2, "0");
-        timerDisplay.set(`${minutes}:${seconds}`);
+        timerDisplay.set(formatTimerTime(timerValue));
     }
 
     function onTick() {

@@ -1,8 +1,13 @@
 import { goto } from '$app/navigation';
+import { serverUrl } from '../../env';
 
 export function checkAuth() {
+    if (!sessionStorage) {
+        goto("/login");
+        return;
+    }
     const token = sessionStorage.getItem("auth_token");
-    if (token === null) goto("/login");
+    if (!token) goto("/login");
 }
 
 export function getAuthorizationHeader() {
@@ -11,7 +16,7 @@ export function getAuthorizationHeader() {
 }
 
 export async function attemptLogin(username: string, password: string): Promise<boolean> {
-    const response = await fetch("http://127.0.0.1:5000/auth/login", {
+    const response = await fetch(`${serverUrl}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json", },
         body: JSON.stringify({ username, password }),

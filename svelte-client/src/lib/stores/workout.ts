@@ -2,12 +2,11 @@ import { writable } from "svelte/store";
 import { defaultExercise, type Exercise } from "$lib/interfaces/exercise";
 import { defaultSet, type Set } from "$lib/interfaces/set";
 import { getAuthorizationHeader } from "./authentication";
-import { fetchlogs } from "./logs";
+import { stopTimer } from "./workout-timer";
 
 export const workoutState = {
     inWorkout: false,
     currentExercise: writable<Exercise>(defaultExercise),
-
     completedSets: new Map<string, Set[]>(),
 };
 
@@ -28,7 +27,9 @@ export function addSet(exercise: Exercise): Set[] {
 }
 
 export function logWorkout() {
-    const completedDate = new Date();
+    const date = new Date();
+
+    const duration = stopTimer();
 
     let completedExercises = [];
     for (let [exercise, sets] of workoutState.completedSets) {
@@ -46,9 +47,6 @@ export function logWorkout() {
     fetch("http://127.0.0.1:5000/workout/", {
         method: "POST",
         headers: { Authorization: getAuthorizationHeader(), 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            date: completedDate,
-            exercises: completedExercises,
-        }),
+        body: JSON.stringify({ date, duration, exercises: completedExercises, }),
     });
 }

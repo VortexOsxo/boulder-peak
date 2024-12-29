@@ -5,9 +5,12 @@
     import { exercises } from "$lib/stores/exercices";
     import { get } from "svelte/store";
     import { goto } from "$app/navigation";
+    import { startTimer } from "$lib/stores/workout-timer";
 
     function startWorkout() {
         workoutState.inWorkout = true;
+        startTimer();
+
         let exercisesArray = get(exercises);
         if (exercisesArray.length > 0)
             workoutState.currentExercise.set(exercisesArray[0]);

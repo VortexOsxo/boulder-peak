@@ -6,13 +6,17 @@
     let username = "";
     let password = "";
 
+    let messsage = "Login"
+
     // @ts-ignore
     async function onSubmit(event) {
+        messsage = "Logging in..."
         event.preventDefault();
 
         if (!username.trim() || !password.trim()) return;
-
+        messsage = "Valid input";
         const success = await attemptLogin(username, password);
+        messsage = "Got answer";
         if (success) goto('/home');
     }
 </script>
@@ -59,7 +63,7 @@
                 type="submit"
                 class="w-full py-2 px-4 bg-accent text-sky-950 font-semibold rounded-lg focus:ring-accent focus:ring-2"
             >
-                Log in
+                {messsage}
             </button>
         </form>
     </Card>

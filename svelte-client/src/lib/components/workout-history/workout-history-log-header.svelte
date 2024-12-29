@@ -24,6 +24,7 @@
 <div class="bg-secondary-background p-4 mb-4">
     <button onclick={selectLog}>
         <p>{formatDate(workout.date)}</p>
+        <p>{workout.duration} seconds</p>
         <p>{workout.exercises.length} exercices</p>
     </button>
 </div>
