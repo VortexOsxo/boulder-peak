@@ -3,6 +3,8 @@ import { getAuthorizationHeader } from "./authentication";
 
 export const logs = writable([]);
 
+export const selectedLog = writable(null);
+
 export function fetchlogs() {
     fetch("http://127.0.0.1:5000/workout/", {
         method: "GET",
