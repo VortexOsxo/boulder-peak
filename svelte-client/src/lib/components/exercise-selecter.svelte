@@ -11,8 +11,12 @@
 
     let { closeCallback } = $props();
 
+    let filter = $state("");
+
     selectedExercises.clear();
-    get(workoutTargets).forEach((target) => selectedExercises.add(target.exercise));
+    get(workoutTargets).forEach((target) =>
+        selectedExercises.add(target.exercise),
+    );
 
     // @ts-ignore
     function toggleSelection(exercise) {
@@ -20,12 +24,31 @@
             ? selectedExercises.delete(exercise)
             : selectedExercises.add(exercise);
     }
+
+    let filteredExerciseData = $derived(
+        $exerciseData.filter((exercise) =>
+            exercise.name.toLowerCase().includes(filter.toLowerCase()),
+        ),
+    );
 </script>
 
 <div class="overflow-y-auto h-full no-scrollbar">
-    {#each $exerciseData as exercise, index}
+    <h2 class="text-2xl font-bold m-4 text-title-text">Select Exercises</h2>
+
+    <div class="p-4 flex">
+        <input
+            type="text"
+            bind:value={filter}
+            class="bg-primary-backgroud rounded-lg m-2"
+            placeholder="Search"
+        />
+
+        <button class="text-accent font-bold"> Filter </button>
+    </div>
+
+    {#each filteredExerciseData as exercise, index}
         <div class="flex items-center justify-between">
-            <h3 class="text-xl font-semibold text-title-text m-4">
+            <h3 class="text-xl font-semibold text-main-text m-4">
                 {exercise.name}
             </h3>
             <Checkbox
@@ -42,7 +65,7 @@
 </div>
 
 <button
-    class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-25 bg-accent text-white px-4 py-2 rounded"
+    class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-25 bg-accent text-black px-4 py-2 rounded"
     onclick={() => {
         updateExercisesWithSelected(selectedExercises);
         closeCallback();
