@@ -1,6 +1,8 @@
 <script>
 	import { muscleFilter } from "$lib/stores/workout/workout-creation";
-    import { get } from "svelte/store";
+	import { get } from "svelte/store";
+	import AccentButton from "../ui/accent-button.svelte";
+	import DefaultButton from "../ui/default-button.svelte";
 
 	let visible = $state(false);
 
@@ -30,7 +32,6 @@
 		selectedFilter = "";
 		visible = false;
 	}
-
 </script>
 
 <button class="text-accent font-bold" onclick={() => (visible = true)}>
@@ -47,8 +48,10 @@
 			<div class="grid grid-cols-3">
 				{#each muscles as muscle}
 					<button
-						class="{selectedFilter === muscle ? 'bg-accent' : 'bg-primary-background'} p-4 m-4 rounded-lg w-24 h-24 flex flex-col items-center justify-center"
-						onclick={() => selectedFilter = muscle}
+						class="{selectedFilter === muscle
+							? 'bg-accent'
+							: 'bg-primary-background'} p-4 m-4 rounded-lg w-24 h-24 flex flex-col items-center justify-center"
+						onclick={() => (selectedFilter = muscle)}
 					>
 						<img
 							src={`/musclegroups/${muscle}.png`}
@@ -60,17 +63,8 @@
 				{/each}
 			</div>
 			<div class="flex justify-center gap-4">
-				<button
-					onclick={select}
-					class="text-black bg-accent p-4 rounded"
-				>
-					Select
-				</button>
-				<button
-					onclick={clear}
-					class="text-title-text bg-primary-background p-4 rounded"
-					>Clear</button
-				>
+				<AccentButton onclick={select}>Select</AccentButton>
+				<DefaultButton onclick={clear}>Clear</DefaultButton>
 			</div>
 		</div>
 	</div>

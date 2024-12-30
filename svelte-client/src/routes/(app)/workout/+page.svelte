@@ -6,6 +6,7 @@
     import { get } from "svelte/store";
     import { goto } from "$app/navigation";
     import { startTimer } from "$lib/stores/workout/workout-timer";
+    import AccentButton from "$lib/components/ui/accent-button.svelte";
 
     function startWorkout() {
         workoutState.inWorkout = true;
@@ -21,24 +22,24 @@
         logWorkout();
         goto("history");
     }
-
 </script>
 
 {#if !workoutState.inWorkout}
     <ExerciseList />
 
-    <button
-        class="fixed bottom-32 left-1/2 transform -translate-x-1/2 z-25 bg-accent text-black px-4 py-2 rounded"
+    <AccentButton
         onclick={startWorkout}
+        tailwind="fixed bottom-32 left-1/2 transform -translate-x-1/2 z-25"
     >
         Start Workout
-    </button>
+    </AccentButton>
 {:else}
     <WorkoutSession />
-    <button
-        class="fixed bottom-32 left-1/2 transform -translate-x-1/2 z-25 bg-accent text-black px-4 py-2 rounded"
+
+    <AccentButton
         onclick={stopWorkout}
+        tailwind="fixed bottom-32 left-1/2 transform -translate-x-1/2 z-25"
     >
         Complete Workout
-    </button>
+    </AccentButton>
 {/if}

@@ -2,169 +2,169 @@
     {
         "id": "pushups",
         "name": "Pushups",
-        "primary": "Chest",
+        "primary": "chest",
         "secondary": [
-            "Triceps",
-            "Shoulders"
+            "triceps",
+            "shoulders"
         ]
     },
     {
         "id": "pullups",
         "name": "Pullups",
-        "primary": "Back",
+        "primary": "lats",
         "secondary": [
-            "Biceps",
-            "Forearms"
+            "biceps",
+            "forarms"
         ]
     },
     {
         "id": "dumbbell-bench-press",
         "name": "Dumbbell Bench Press",
-        "primary": "Chest",
+        "primary": "chest",
         "secondary": [
-            "Triceps",
-            "Shoulders"
+            "triceps",
+            "shoulders"
         ]
     },
     {
         "id": "shoulder-press",
         "name": "Shoulder Press",
-        "primary": "Shoulders",
+        "primary": "shoulders",
         "secondary": [
-            "Triceps",
-            "Chest"
+            "triceps",
+            "chest"
         ]
     },
     {
         "id": "dumbbell-curls",
         "name": "Dumbbell Curls",
-        "primary": "Biceps",
+        "primary": "biceps",
         "secondary": [
-            "Forearms"
+            "forarms"
         ]
     },
     {
         "id": "dumbbell-rows",
         "name": "Dumbbell Rows",
-        "primary": "Back",
+        "primary": "lats",
         "secondary": [
-            "Biceps",
-            "Forearms"
+            "biceps",
+            "forarms"
         ]
     },
     {
         "id": "deadlifts",
         "name": "Deadlifts",
-        "primary": "Back",
+        "primary": "lats",
         "secondary": [
-            "Legs",
-            "Forearms"
+            "legs",
+            "forarms"
         ]
     },
     {
         "id": "squats",
         "name": "Squats",
-        "primary": "Legs",
+        "primary": "legs",
         "secondary": [
-            "Back",
-            "Core"
+            "lats",
+            "core"
         ]
     },
     {
         "id": "leg-press",
         "name": "Leg Press",
-        "primary": "Legs",
+        "primary": "legs",
         "secondary": [
-            "Back",
-            "Core"
+            "lats",
+            "core"
         ]
     },
     {
         "id": "lat-pulldowns",
         "name": "Lat Pulldowns",
-        "primary": "Back",
+        "primary": "lats",
         "secondary": [
-            "Biceps",
-            "Forearms"
+            "biceps",
+            "forarms"
         ]
     },
     {
         "id": "dips",
         "name": "Dips",
-        "primary": "Triceps",
+        "primary": "triceps",
         "secondary": [
-            "Chest",
-            "Shoulders"
+            "chest",
+            "shoulders"
         ]
     },
     {
         "id": "machine-flys",
         "name": "Machine Flys",
-        "primary": "Chest",
+        "primary": "chest",
         "secondary": []
     },
     {
         "id": "cable-lateral-raises",
         "name": "Cable Lateral Raises",
-        "primary": "Shoulders",
+        "primary": "shoulders",
         "secondary": []
     },
     {
         "id": "dumbbell-lateral-raises",
         "name": "Dumbbell Lateral Raises",
-        "primary": "Shoulders",
+        "primary": "shoulders",
         "secondary": []
     },
     {
         "id": "barbell-bicep-curls",
         "name": "Barbell Bicep Curls",
-        "primary": "Biceps",
+        "primary": "biceps",
         "secondary": [
-            "Forearms"
+            "forarms"
         ]
     },
     {
         "id": "cable-tricep-pushdowns",
         "name": "Cable Tricep Pushdowns",
-        "primary": "Triceps",
+        "primary": "triceps",
         "secondary": []
     },
     {
         "id": "machine-reverse-flys",
         "name": "Machine Reverse Flys",
-        "primary": "Shoulders",
-        "secondary": ["Back"]
+        "primary": "shoulders",
+        "secondary": ["lats"]
     },
     {
         "id": "dumbbell-inclined-bench-press",
         "name": "Dumbbell Inclined Bench Press",
-        "primary": "Chest",
+        "primary": "chest",
         "secondary": [
-            "Triceps",
-            "Shoulders"
+            "triceps",
+            "shoulders"
         ]
     },
     {
         "id": "barbell-inclined-bench-press",
         "name": "Barbell Inclined Bench Press",
-        "primary": "Chest",
+        "primary": "chest",
         "secondary": [
-            "Triceps",
-            "Shoulders"
+            "triceps",
+            "shoulders"
         ]
     },
     {
         "id": "dumbbell-shoulder-press",
         "name": "Dumbbell Shoulder Press",
-        "primary": "Shoulders",
+        "primary": "shoulders",
         "secondary": [
-            "Triceps"
+            "triceps"
         ]
     },
     {
         "id": "dumbbell-front-raises",
         "name": "Dumbbell Front Raises",
-        "primary": "Shoulders",
+        "primary": "shoulders",
         "secondary": []
     }
 ]

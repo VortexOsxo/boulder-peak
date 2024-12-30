@@ -11,6 +11,7 @@
         muscleFilter,
         searchFilter,
     } from "$lib/stores/workout/workout-creation";
+    import AccentButton from "../ui/accent-button.svelte";
 
     let { closeCallback } = $props();
 
@@ -29,12 +30,14 @@
     }
 
     let filteredExerciseData = $derived(
-        $exerciseData.filter((exercise) =>
-            exercise.name.toLowerCase().includes($searchFilter.toLowerCase()) &&
-            (!$muscleFilter || $muscleFilter === exercise.primary)
+        $exerciseData.filter(
+            (exercise) =>
+                exercise.name
+                    .toLowerCase()
+                    .includes($searchFilter.toLowerCase()) &&
+                (!$muscleFilter || $muscleFilter === exercise.primary),
         ),
     );
-
 </script>
 
 <div class="overflow-y-auto h-full no-scrollbar">
@@ -69,15 +72,15 @@
     <div class="h-16"></div>
 </div>
 
-<button
-    class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-25 bg-accent text-black px-4 py-2 rounded"
+<AccentButton
+    tailwind="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-25"
     onclick={() => {
         updateExercisesWithSelected(selectedExercises);
         closeCallback();
     }}
 >
     Add exercises
-</button>
+</AccentButton>
 
 <style>
     .no-scrollbar::-webkit-scrollbar {

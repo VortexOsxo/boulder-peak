@@ -3,6 +3,7 @@
     import { Checkbox } from "flowbite-svelte";
     import { onDestroy } from "svelte";
     import { get } from "svelte/store";
+    import AccentButton from "../ui/accent-button.svelte";
 
     const { currentExercise } = workoutState;
     let sets = initializeSets(get(currentExercise));
@@ -46,10 +47,7 @@
         </div>
     {/each}
 
-    <button
-        class="bg-accent text-white px-4 py-2 rounded"
-        onclick={handleAddSet}
-    >
-        Add Set
-    </button>
+    <AccentButton onclick={handleAddSet}>
+        AddSet
+    </AccentButton>
 </div>
