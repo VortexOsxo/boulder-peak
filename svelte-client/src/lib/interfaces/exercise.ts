@@ -1,3 +1,10 @@
+export interface ExerciseData {
+    id: string;
+    name: string;
+    primary: string;
+    secondary: string[];
+}
+
 export interface Exercise {
     name: string;
     sets: number;

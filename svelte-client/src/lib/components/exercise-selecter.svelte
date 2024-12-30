@@ -1,7 +1,9 @@
 <script>
     import { get } from "svelte/store";
     import { Checkbox } from "flowbite-svelte";
-    import { exercises, selectedExercises, updateExercisesWithSelected } from "$lib/stores/exercices";
+    import { exercises, updateExercisesWithSelected } from "$lib/stores/exercices";
+
+    let selectedExercises = new Set();
 
     let { closeCallback } = $props();
 
