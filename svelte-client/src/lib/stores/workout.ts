@@ -1,29 +1,32 @@
 import { writable } from "svelte/store";
-import { defaultExercise, type Exercise } from "$lib/interfaces/exercise";
+import { defaultExercise, type Exercise, type ExerciseTarget } from "$lib/interfaces/exercise";
 import { defaultSet, type Set } from "$lib/interfaces/set";
 import { getAuthorizationHeader } from "./authentication";
 import { stopTimer } from "./workout-timer";
 
 export const workoutState = {
     inWorkout: false,
-    currentExercise: writable<Exercise>(defaultExercise),
+    currentExercise: writable<ExerciseTarget>(),
     completedSets: new Map<string, Set[]>(),
 };
 
-export function initializeSets(exercise: Exercise): Set[] {
-    if (!workoutState.completedSets.has(exercise.name)) {
-        workoutState.completedSets.set(exercise.name, []);
-        for (let i = 0; i < exercise.sets; i++) {
-            addSet(exercise);
+export function initializeSets(target: ExerciseTarget): Set[] {
+    console.log(target);
+    let name = target.exercise.name;
+    if (!workoutState.completedSets.has(name)) {
+        workoutState.completedSets.set(name, []);
+        for (let i = 0; i < target.sets; i++) {
+            addSet(target);
         }
     }
 
-    return workoutState.completedSets.get(exercise.name)!;
+    return workoutState.completedSets.get(name)!;
 }
 
-export function addSet(exercise: Exercise): Set[] {
-    workoutState.completedSets.get(exercise.name)?.push({ ...defaultSet });
-    return workoutState.completedSets.get(exercise.name)!;
+export function addSet(target: ExerciseTarget): Set[] {
+    let name = target.exercise.name;
+    workoutState.completedSets.get(name)?.push({ weight: target.weight, reps: target.reps, done: false });
+    return workoutState.completedSets.get(name)!;
 }
 
 export function logWorkout() {

@@ -13,6 +13,7 @@ export interface Exercise {
 }
 
 export interface ExerciseTarget {
+    exercise: ExerciseData
     sets: number;
     reps: number;
     weight: number;

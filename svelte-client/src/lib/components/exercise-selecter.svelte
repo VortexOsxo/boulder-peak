@@ -3,7 +3,7 @@
     import { Checkbox } from "flowbite-svelte";
     import {
         exerciseData,
-        exercises,
+        workoutTargets as workoutTargets,
         updateExercisesWithSelected,
     } from "$lib/stores/exercices";
 
@@ -12,7 +12,7 @@
     let { closeCallback } = $props();
 
     selectedExercises.clear();
-    get(exercises).forEach((exercise) => selectedExercises.add(exercise.name));
+    get(workoutTargets).forEach((target) => selectedExercises.add(target.exercise));
 
     // @ts-ignore
     function toggleSelection(exercise) {

@@ -1,4 +1,4 @@
-import type { Exercise, ExerciseData } from '$lib/interfaces/exercise';
+import type { Exercise, ExerciseData, ExerciseTarget } from '$lib/interfaces/exercise';
 import { get, writable } from 'svelte/store';
 import { serverUrl } from '../../env';
 
@@ -9,18 +9,21 @@ export function fetchExerciseData() {
         .then(response => response.json()).then(exerciseData.set);
 }
 
-export const exercises = writable<Exercise[]>([]);
+export const workoutTargets = writable<ExerciseTarget[]>([]);
 
-export function addExerciseByName(exerciseName: string) {
-    if (get(exercises).find(exercise => exercise.name === exerciseName)) return;
-    const exercise = { name: exerciseName, reps: 10, sets: 3, weight: 50 };
-    exercises.update(exerciseList => [...exerciseList, exercise]);
+export function addExercise(exercise: ExerciseData) {
+    if (get(workoutTargets).find(target => target.exercise === exercise)) return;
+
+    workoutTargets.update(exerciseList => [...exerciseList, { exercise, sets: 3, reps: 8, weight: 50 }]);
 }
 
-export function updateExercisesWithSelected(selectedExercises: Set<string>) {
-    exercises.update(exercises => exercises.filter(exercise => selectedExercises.has(exercise.name)));
+export function updateExercisesWithSelected(selectedExercises: Set<ExerciseData>) {
 
-    selectedExercises.forEach(exerciseName => addExerciseByName(exerciseName));
+    workoutTargets.update(exercises =>
+        exercises.filter((target) => selectedExercises.has(target.exercise))
+    );
+
+    selectedExercises.forEach(exercise => addExercise(exercise));
 }
 
 fetchExerciseData();

@@ -1,10 +1,10 @@
 <script>
-  import { exercises } from "../stores/exercices";
+  import { workoutTargets } from "../stores/exercices";
   import { derived } from "svelte/store";
   import AddExerciseWindow from "./sliding-window.svelte";
   import ExerciseSelecter from "./exercise-selecter.svelte";
 
-  const exerciseCount = derived(exercises, ($exercises) => $exercises.length);
+  const exerciseCount = derived(workoutTargets, ($workoutExercises) => $workoutExercises.length);
   let showWindow = false;
 
   function toggleWindow() {

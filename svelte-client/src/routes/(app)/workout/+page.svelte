@@ -2,7 +2,7 @@
     import ExerciseList from "$lib/components/exercise-list.svelte";
     import { workoutState, logWorkout } from "$lib/stores/workout";
     import WorkoutSession from "$lib/components/workout-session/workout-session.svelte";
-    import { exercises } from "$lib/stores/exercices";
+    import { workoutTargets } from "$lib/stores/exercices";
     import { get } from "svelte/store";
     import { goto } from "$app/navigation";
     import { startTimer } from "$lib/stores/workout-timer";
@@ -11,7 +11,7 @@
         workoutState.inWorkout = true;
         startTimer();
 
-        let exercisesArray = get(exercises);
+        let exercisesArray = get(workoutTargets);
         if (exercisesArray.length > 0)
             workoutState.currentExercise.set(exercisesArray[0]);
     }

@@ -22,7 +22,7 @@
 </script>
 
 <div class="flex flex-col items-center">
-    <p class="text-title-text">{$currentExercise.name}</p>
+    <p class="text-title-text">{$currentExercise.exercise.name}</p>
     {#each sets as set, index}
         <div class="flex items-center mb-4">
             <p class="mr-4 text-title-text">Set {index + 1}</p>

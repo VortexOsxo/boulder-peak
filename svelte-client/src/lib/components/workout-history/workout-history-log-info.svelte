@@ -1,7 +1,7 @@
 <script>
     // @ts-nocheck
 
-    import { exercises } from "$lib/stores/exercices";
+    import { workoutTargets } from "$lib/stores/exercices";
 
     let { workout } = $props();
 
