@@ -2,11 +2,11 @@ import type { Exercise, ExerciseTarget } from '$lib/interfaces/exercise';
 import { get, writable } from 'svelte/store';
 import { serverUrl } from '../../env';
 
-export const exerciseData = writable<Exercise[]>([]);
+export const exercises = writable<Exercise[]>([]);
 
 export function fetchExerciseData() {
     fetch(`${serverUrl}/exercise`)
-        .then(response => response.json()).then(exerciseData.set);
+        .then(response => response.json()).then(exercises.set);
 }
 
 export const workoutTargets = writable<ExerciseTarget[]>([]);

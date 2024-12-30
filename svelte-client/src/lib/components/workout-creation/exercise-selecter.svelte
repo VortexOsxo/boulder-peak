@@ -2,7 +2,7 @@
     import { get } from "svelte/store";
     import { Checkbox } from "flowbite-svelte";
     import {
-        exerciseData,
+        exercises,
         workoutTargets as workoutTargets,
         updateExercisesWithSelected,
     } from "$lib/stores/exercices";
@@ -30,7 +30,7 @@
     }
 
     let filteredExerciseData = $derived(
-        $exerciseData.filter(
+        $exercises.filter(
             (exercise) =>
                 exercise.name
                     .toLowerCase()
@@ -65,7 +65,7 @@
                 on:change={() => toggleSelection(exercise)}
             />
         </div>
-        {#if index < $exerciseData.length - 1}
+        {#if index < $exercises.length - 1}
             <hr class="border-t border-gray-300" />
         {/if}
     {/each}
