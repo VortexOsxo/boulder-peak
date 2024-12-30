@@ -8,7 +8,7 @@
 
     function navigate() {
         navBarSelected.set(name);
-        goto(name);
+        goto(`/${name}`);
     }
 </script>
 
