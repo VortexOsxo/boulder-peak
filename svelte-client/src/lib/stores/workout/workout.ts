@@ -1,8 +1,9 @@
 import { writable } from "svelte/store";
 import { type ExerciseTarget } from "$lib/interfaces/exercise";
 import { type Set } from "$lib/interfaces/set";
-import { getAuthorizationHeader } from "./authentication";
+import { getAuthorizationHeader } from "../authentication";
 import { stopTimer } from "./workout-timer";
+import { serverUrl } from "../../../env";
 
 export const workoutState = {
     inWorkout: false,
@@ -46,7 +47,7 @@ export function logWorkout() {
         completedExercises.push(completedExercise);
     }
 
-    fetch("http://127.0.0.1:5000/workout/", {
+    fetch(`${serverUrl}/workout/`, {
         method: "POST",
         headers: { Authorization: getAuthorizationHeader(), 'Content-Type': 'application/json' },
         body: JSON.stringify({ date, duration, exercises: completedExercises, }),

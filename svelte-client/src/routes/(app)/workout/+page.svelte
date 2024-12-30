@@ -1,11 +1,11 @@
 <script>
     import ExerciseList from "$lib/components/exercise-list.svelte";
-    import { workoutState, logWorkout } from "$lib/stores/workout";
+    import { workoutState, logWorkout } from "$lib/stores/workout/workout";
     import WorkoutSession from "$lib/components/workout-session/workout-session.svelte";
     import { workoutTargets } from "$lib/stores/exercices";
     import { get } from "svelte/store";
     import { goto } from "$app/navigation";
-    import { startTimer } from "$lib/stores/workout-timer";
+    import { startTimer } from "$lib/stores/workout/workout-timer";
 
     function startWorkout() {
         workoutState.inWorkout = true;

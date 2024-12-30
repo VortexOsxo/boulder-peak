@@ -6,12 +6,15 @@
         workoutTargets as workoutTargets,
         updateExercisesWithSelected,
     } from "$lib/stores/exercices";
-
-    let selectedExercises = new Set();
+    import MuscleFilterSelection from "./muscle-filter-selection.svelte";
+    import {
+        muscleFilter,
+        searchFilter,
+    } from "$lib/stores/workout/workout-creation";
 
     let { closeCallback } = $props();
 
-    let filter = $state("");
+    let selectedExercises = new Set();
 
     selectedExercises.clear();
     get(workoutTargets).forEach((target) =>
@@ -27,9 +30,11 @@
 
     let filteredExerciseData = $derived(
         $exerciseData.filter((exercise) =>
-            exercise.name.toLowerCase().includes(filter.toLowerCase()),
+            exercise.name.toLowerCase().includes($searchFilter.toLowerCase()) &&
+            (!$muscleFilter || $muscleFilter === exercise.primary)
         ),
     );
+
 </script>
 
 <div class="overflow-y-auto h-full no-scrollbar">
@@ -38,12 +43,12 @@
     <div class="p-4 flex">
         <input
             type="text"
-            bind:value={filter}
+            bind:value={$searchFilter}
             class="bg-primary-backgroud rounded-lg m-2"
             placeholder="Search"
         />
 
-        <button class="text-accent font-bold"> Filter </button>
+        <MuscleFilterSelection />
     </div>
 
     {#each filteredExerciseData as exercise, index}

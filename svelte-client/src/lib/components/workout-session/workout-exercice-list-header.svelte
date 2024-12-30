@@ -1,5 +1,5 @@
 <script>
-    import { workoutState } from "$lib/stores/workout";
+    import { workoutState } from "$lib/stores/workout/workout";
 
     let { target } = $props();
 

@@ -2,7 +2,7 @@
   import { workoutTargets } from "../stores/exercices";
   import { derived } from "svelte/store";
   import AddExerciseWindow from "./sliding-window.svelte";
-  import ExerciseSelecter from "./exercise-selecter.svelte";
+  import ExerciseSelecter from "./workout-creation/exercise-selecter.svelte";
 
   const exerciseCount = derived(workoutTargets, ($workoutExercises) => $workoutExercises.length);
   let showWindow = false;
