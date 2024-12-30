@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
-import { defaultExercise, type Exercise, type ExerciseTarget } from "$lib/interfaces/exercise";
-import { defaultSet, type Set } from "$lib/interfaces/set";
+import { type ExerciseTarget } from "$lib/interfaces/exercise";
+import { type Set } from "$lib/interfaces/set";
 import { getAuthorizationHeader } from "./authentication";
 import { stopTimer } from "./workout-timer";
 
@@ -11,7 +11,6 @@ export const workoutState = {
 };
 
 export function initializeSets(target: ExerciseTarget): Set[] {
-    console.log(target);
     let name = target.exercise.name;
     if (!workoutState.completedSets.has(name)) {
         workoutState.completedSets.set(name, []);

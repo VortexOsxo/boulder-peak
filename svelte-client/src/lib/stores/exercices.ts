@@ -1,8 +1,8 @@
-import type { Exercise, ExerciseData, ExerciseTarget } from '$lib/interfaces/exercise';
+import type { Exercise, ExerciseTarget } from '$lib/interfaces/exercise';
 import { get, writable } from 'svelte/store';
 import { serverUrl } from '../../env';
 
-export const exerciseData = writable<ExerciseData[]>([]);
+export const exerciseData = writable<Exercise[]>([]);
 
 export function fetchExerciseData() {
     fetch(`${serverUrl}/exercise`)
@@ -11,13 +11,13 @@ export function fetchExerciseData() {
 
 export const workoutTargets = writable<ExerciseTarget[]>([]);
 
-export function addExercise(exercise: ExerciseData) {
+export function addExercise(exercise: Exercise) {
     if (get(workoutTargets).find(target => target.exercise === exercise)) return;
 
     workoutTargets.update(exerciseList => [...exerciseList, { exercise, sets: 3, reps: 8, weight: 50 }]);
 }
 
-export function updateExercisesWithSelected(selectedExercises: Set<ExerciseData>) {
+export function updateExercisesWithSelected(selectedExercises: Set<Exercise>) {
 
     workoutTargets.update(exercises =>
         exercises.filter((target) => selectedExercises.has(target.exercise))
