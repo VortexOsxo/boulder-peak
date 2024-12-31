@@ -1,6 +1,6 @@
 <script>
+    import { workoutTargets } from "$lib/stores/workout/workout-schema";
     import WorkoutExerciceListHeader from "./workout-exercice-list-header.svelte";
-    import { workoutTargets } from "$lib/stores/exercices";
 </script>
 
 <div

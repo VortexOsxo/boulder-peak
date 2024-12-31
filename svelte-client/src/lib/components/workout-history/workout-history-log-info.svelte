@@ -1,8 +1,5 @@
 <script>
     // @ts-nocheck
-
-    import { workoutTargets } from "$lib/stores/exercices";
-
     let { workout } = $props();
 
     function formatDate(dateString) {

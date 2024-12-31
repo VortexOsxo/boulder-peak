@@ -1,6 +1,6 @@
 <script lang="ts">
+    import { workoutTargets } from "$lib/stores/workout/workout-schema";
   import ExerciseHeader from "./exercise-header.svelte";
-  import { workoutTargets } from "../stores/exercices";
   import ExerciseListHeader from "./exercise-list-header.svelte";
 </script>
 

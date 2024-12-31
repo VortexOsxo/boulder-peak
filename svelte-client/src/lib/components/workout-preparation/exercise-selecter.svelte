@@ -1,11 +1,7 @@
 <script>
     import { get } from "svelte/store";
     import { Checkbox } from "flowbite-svelte";
-    import {
-        exercises,
-        workoutTargets as workoutTargets,
-        updateExercisesWithSelected,
-    } from "$lib/stores/exercices";
+    import { exercises } from "$lib/stores/exercices";
     import MuscleFilterSelection from "./muscle-filter-selection.svelte";
     import {
         muscleFilter,
@@ -13,6 +9,7 @@
     } from "$lib/stores/workout/workout-creation";
     import AccentButton from "../ui/accent-button.svelte";
     import DefaultButton from "../ui/default-button.svelte";
+    import { updateExercises, workoutTargets } from "$lib/stores/workout/workout-schema";
 
     let { closeCallback } = $props();
 
@@ -76,14 +73,16 @@
 <div class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-25 flex gap-4">
     <AccentButton
         onclick={() => {
-            updateExercisesWithSelected(selectedExercises);
+            updateExercises(selectedExercises);
             closeCallback();
         }}
     >
         Add exercises
     </AccentButton>
 
-    <DefaultButton tailwind="bg-secondary-background" onclick={closeCallback}>Cancel</DefaultButton>
+    <DefaultButton tailwind="bg-secondary-background" onclick={closeCallback}
+        >Cancel</DefaultButton
+    >
 </div>
 
 <style>

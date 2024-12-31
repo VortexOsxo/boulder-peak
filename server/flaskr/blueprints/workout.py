@@ -19,7 +19,7 @@ def log_workout():
 
 @workout_bp.route("/", methods=["GET"])
 @login_required
-def get_workjouts():
+def get_workouts():
     sorts = {'date': -1, 'duration': -1}
     sort = request.args.get('sort')
     if sort not in sorts: sort = 'date'
