@@ -2,6 +2,8 @@
     import { goto } from "$app/navigation";
     import ExerciseList from "$lib/components/exercise-list.svelte";
     import AccentButton from "$lib/components/ui/accent-button.svelte";
+    import DefaultButton from "$lib/components/ui/default-button.svelte";
+    import Modal from "$lib/components/ui/modal.svelte";
     import { workoutTargets } from "$lib/stores/exercices";
     import { workoutState } from "$lib/stores/workout/workout";
     import { startTimer } from "$lib/stores/workout/workout-timer";
@@ -26,15 +28,29 @@
     <button class="text-accent text-3xl" onclick={() => (visible = true)}>
         &#8230
     </button>
-    {#if visible}
-        <div class="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
-            <div
-                class="bg-secondary-background p-6 rounded-lg shadow-lg w-96"
+
+    <Modal {visible}>
+        <div class="flex flex-col space-y-4">
+            <DefaultButton onclick={() => {}} tailwind="font-bold">
+                Load Workout
+            </DefaultButton>
+
+            <DefaultButton onclick={() => {}} tailwind="font-bold">
+                Save Workout
+            </DefaultButton>
+
+            <DefaultButton onclick={() => {}} tailwind="font-bold">
+                Generate Workout
+            </DefaultButton>
+
+            <DefaultButton
+                onclick={() => (visible = false)}
+                tailwind="font-bold"
             >
-                <h1 class="text-title-text font-bold">Select target muscle</h1>
-            </div>
+                Cancel
+            </DefaultButton>
         </div>
-    {/if}
+    </Modal>
 </div>
 
 <ExerciseList />

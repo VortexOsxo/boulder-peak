@@ -12,6 +12,7 @@
         searchFilter,
     } from "$lib/stores/workout/workout-creation";
     import AccentButton from "../ui/accent-button.svelte";
+    import DefaultButton from "../ui/default-button.svelte";
 
     let { closeCallback } = $props();
 
@@ -72,15 +73,18 @@
     <div class="h-16"></div>
 </div>
 
-<AccentButton
-    tailwind="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-25"
-    onclick={() => {
-        updateExercisesWithSelected(selectedExercises);
-        closeCallback();
-    }}
->
-    Add exercises
-</AccentButton>
+<div class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-25 flex gap-4">
+    <AccentButton
+        onclick={() => {
+            updateExercisesWithSelected(selectedExercises);
+            closeCallback();
+        }}
+    >
+        Add exercises
+    </AccentButton>
+
+    <DefaultButton tailwind="bg-secondary-background" onclick={closeCallback}>Cancel</DefaultButton>
+</div>
 
 <style>
     .no-scrollbar::-webkit-scrollbar {
