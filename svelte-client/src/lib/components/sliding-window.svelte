@@ -1,6 +1,6 @@
 <script>
     import { slide } from "svelte/transition";
-    let { name, children, visible = false, onClose = () => {} } = $props();
+    let { children, visible = false, onClose = () => {} } = $props();
 
     function close() {
         visible = false;

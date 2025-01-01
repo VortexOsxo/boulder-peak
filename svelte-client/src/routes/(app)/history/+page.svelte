@@ -4,8 +4,10 @@
     import WorkoutHistoryLogHeader from "$lib/components/workout-history/workout-history-log-header.svelte";
     import WorkoutHistoryLogInfo from "$lib/components/workout-history/workout-history-log-info.svelte";
     import { fetchlogs, logs, selectedLog } from "$lib/stores/logs";
+    import { onMount } from "svelte";
     import { get } from "svelte/store";
-    fetchlogs();
+    
+    onMount(fetchlogs);
 </script>
 
 {#if !$selectedLog}

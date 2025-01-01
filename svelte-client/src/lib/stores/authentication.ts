@@ -2,10 +2,6 @@ import { goto } from '$app/navigation';
 import { serverUrl } from '../../env';
 
 export function checkAuth() {
-    if (!sessionStorage) {
-        goto("/login");
-        return;
-    }
     const token = sessionStorage.getItem("auth_token");
     if (!token) goto("/login");
 }

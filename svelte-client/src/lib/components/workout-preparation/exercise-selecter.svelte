@@ -9,7 +9,10 @@
     } from "$lib/stores/workout/workout-creation";
     import AccentButton from "../ui/accent-button.svelte";
     import DefaultButton from "../ui/default-button.svelte";
-    import { updateExercises, workoutTargets } from "$lib/stores/workout/workout-schema";
+    import {
+        updateExercises,
+        workoutTargets,
+    } from "$lib/stores/workout/workout-schema";
 
     let { closeCallback } = $props();
 
@@ -77,7 +80,7 @@
             closeCallback();
         }}
     >
-        Add exercises
+        Select
     </AccentButton>
 
     <DefaultButton tailwind="bg-secondary-background" onclick={closeCallback}

@@ -5,8 +5,6 @@
 	import DefaultButton from "../ui/default-button.svelte";
 	import Modal from "../ui/modal.svelte";
 
-	let visible = $state(false);
-
 	let muscles = [
 		"abs",
 		"biceps",
@@ -22,6 +20,7 @@
 	];
 
 	let selectedFilter = $state(get(muscleFilter));
+	let visible = $state(false);
 
 	function select() {
 		muscleFilter.set(selectedFilter);

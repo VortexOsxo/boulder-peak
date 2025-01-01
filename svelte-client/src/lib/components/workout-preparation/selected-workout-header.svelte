@@ -1,12 +1,12 @@
 <script>
     import Modal from "$lib/components/ui/modal.svelte";
-    import { exercises } from "$lib/stores/exercices";
     import {
         fetchWorkoutSchema,
         loadWorkoutSchema,
         saveWorkoutSchema,
         workoutSchemas,
     } from "$lib/stores/workout/workout-schema";
+    import { onMount } from "svelte";
     import AccentButton from "../ui/accent-button.svelte";
     import DefaultButton from "../ui/default-button.svelte";
 
@@ -20,7 +20,7 @@
         visible = false;
     }
 
-    fetchWorkoutSchema();
+    onMount(fetchWorkoutSchema);
 </script>
 
 <div
