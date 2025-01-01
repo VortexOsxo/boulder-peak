@@ -1,6 +1,6 @@
 <script>
     // @ts-nocheck
-
+    import { goto } from "$app/navigation";
     import { selectedLog } from "$lib/stores/logs";
 
     let { workout } = $props();
@@ -18,7 +18,9 @@
 
     function selectLog() {
         selectedLog.set(workout);
+        goto('history/workout');
     }
+
 </script>
 
 <div class="bg-secondary-background p-4 mb-4">

@@ -6,18 +6,15 @@
     import { fetchlogs, logs, selectedLog } from "$lib/stores/logs";
     import { onMount } from "svelte";
     import { get } from "svelte/store";
-    
+
     onMount(fetchlogs);
 </script>
 
-{#if !$selectedLog}
-    {#if !$logs.length}
-        <p>No logs found</p>
-    {/if}
+{#if !$logs.length}
+    <p>No logs found</p>
+{:else}
     <h1 class="text-main-text p-4">Past Workouts</h1>
     {#each $logs as workout}
-        <WorkoutHistoryLogHeader workout={workout} />
+        <WorkoutHistoryLogHeader {workout} />
     {/each}
-{:else}
-    <WorkoutHistoryLogInfo workout={get(selectedLog)} />
 {/if}
