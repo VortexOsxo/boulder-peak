@@ -1,5 +1,9 @@
 <script>
     // @ts-nocheck
+    import { goto } from "$app/navigation";
+    import { oneRepMax } from "$lib/utils/orm";
+    import { onMount } from "svelte";
+
     let { workout } = $props();
 
     function formatDate(dateString) {
@@ -14,16 +18,27 @@
     }
 </script>
 
-<div class="p-4 mb-4 text-main-text">
-    <p>{formatDate(workout.date)}</p>
-    <p>{workout.duration} seconds</p>
-    <p>{workout.exercises.length} exercises:</p>
-    {#each workout.exercises as exercise}
-        <div class="ml-4">
-            <p>{exercise.name}</p>
-            {#each exercise.sets as set}
-                <p class="ml-8">{set.reps} reps at {set.weight} lbs</p>
-            {/each}
-        </div>
-    {/each}
-</div>
+{#if workout}
+    <div class="p-4 mb-4 text-main-text">
+        <p>{formatDate(workout.date)}</p>
+        <p>{workout.duration} seconds</p>
+        <p>{workout.exercises.length} exercises:</p>
+
+        {#each workout.exercises as exercise}
+            <div class="ml-4">
+                <p>{exercise.name}</p>
+                {#if exercise.sets.length}
+                    <p>
+                        1 rep max: {oneRepMax(
+                            exercise.sets[0].weight,
+                            exercise.sets[0].reps,
+                        ).toFixed(1)} lbs
+                    </p>
+                {/if}
+                {#each exercise.sets as set}
+                    <p class="ml-8">{set.reps} reps at {set.weight} lbs</p>
+                {/each}
+            </div>
+        {/each}
+    </div>
+{/if}
