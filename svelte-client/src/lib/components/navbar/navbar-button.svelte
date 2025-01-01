@@ -1,6 +1,6 @@
 <script lang="ts">
     import { goto } from '$app/navigation';
-    import { navBarSelected } from './stores/nav-bar-selected';
+    import { navBarSelected } from '$lib/stores/nav-bar-selected';
 
     let { name } = $props();
 
