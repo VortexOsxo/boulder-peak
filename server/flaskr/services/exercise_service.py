@@ -9,6 +9,6 @@ class ExerciseService:
         return exercises
     
     @staticmethod
-    def get_execise_by_id(id: str):
+    def get_exercise(id: str):
         exercises = ExerciseService.get_exercises()
         return next((exercise for exercise in exercises if exercise['id'] == id), None)

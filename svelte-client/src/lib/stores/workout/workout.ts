@@ -6,27 +6,27 @@ import { stopTimer } from "./workout-timer";
 import { serverUrl } from "../../../env";
 
 export const workoutState = {
-    inWorkout: false,
     currentExercise: writable<ExerciseTarget>(),
-    completedSets: new Map<string, Set[]>(),
 };
 
+let completedSets = new Map<string, Set[]>();
+
 export function initializeSets(target: ExerciseTarget): Set[] {
-    let name = target.exercise.name;
-    if (!workoutState.completedSets.has(name)) {
-        workoutState.completedSets.set(name, []);
+    let id = target.exercise.id;
+    if (!completedSets.has(id)) {
+        completedSets.set(id, []);
         for (let i = 0; i < target.sets; i++) {
             addSet(target);
         }
     }
 
-    return workoutState.completedSets.get(name)!;
+    return completedSets.get(id)!;
 }
 
 export function addSet(target: ExerciseTarget): Set[] {
-    let name = target.exercise.name;
-    workoutState.completedSets.get(name)?.push({ weight: target.weight, reps: target.reps, done: false });
-    return workoutState.completedSets.get(name)!;
+    let id = target.exercise.id;
+    completedSets.get(id)?.push({ weight: target.weight, reps: target.reps, done: false });
+    return completedSets.get(id)!;
 }
 
 export function logWorkout() {
@@ -35,9 +35,9 @@ export function logWorkout() {
     const duration = stopTimer();
 
     let completedExercises = [];
-    for (let [exercise, sets] of workoutState.completedSets) {
+    for (let [exercise, sets] of completedSets) {
         let completedExercise = {
-            name: exercise,
+            id: exercise,
             sets: sets.filter((set) => set.done).map(set => ({
                 weight: set.weight,
                 reps: set.reps,
