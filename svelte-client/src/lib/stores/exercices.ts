@@ -5,9 +5,9 @@ import { PUBLIC_SERVER_URL } from '$env/static/public';
 
 export const exercises = writable<Exercise[]>([]);
 
-export function fetchExerciseData() {
-    fetch(`${PUBLIC_SERVER_URL}/exercise`)
-        .then(response => response.json()).then(exercises.set);
+export async function fetchExercises() {
+    const response = await fetch(`${PUBLIC_SERVER_URL}/exercise/`);
+    exercises.set(await response.json());
 }
 
 export async function fetchExercise(id: string) {
@@ -25,5 +25,3 @@ export async function fetchExerciseLogs(id: string) {
     });
     return await response.json();
 }
-
-fetchExerciseData();
