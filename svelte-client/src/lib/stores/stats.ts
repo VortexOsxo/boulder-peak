@@ -1,8 +1,8 @@
-import { serverUrl } from "../../env";
+import { PUBLIC_SERVER_URL } from "$env/static/public";
 import { getAuthorizationHeader } from "./authentication";
 
 export async function getTotalWorkouts() {
-    const response = await fetch(`${serverUrl}/stats/total-workouts`, {
+    const response = await fetch(`${PUBLIC_SERVER_URL}/stats/total-workouts`, {
         method: "GET",
         headers: { Authorization: getAuthorizationHeader() },
     });
@@ -10,7 +10,7 @@ export async function getTotalWorkouts() {
 }
 
 export async function getTotalVolume() {
-    const response = await fetch(`${serverUrl}/stats/total-volume`, {
+    const response = await fetch(`${PUBLIC_SERVER_URL}/stats/total-volume`, {
         method: "GET",
         headers: { Authorization: getAuthorizationHeader() },
     });

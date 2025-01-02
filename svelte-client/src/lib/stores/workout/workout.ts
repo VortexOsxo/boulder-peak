@@ -3,7 +3,7 @@ import { type ExerciseTarget } from "$lib/interfaces/exercise";
 import { type Set } from "$lib/interfaces/set";
 import { getAuthorizationHeader } from "../authentication";
 import { stopTimer } from "./workout-timer";
-import { serverUrl } from "../../../env";
+import { PUBLIC_SERVER_URL } from "$env/static/public";
 
 export const workoutState = {
     currentExercise: writable<ExerciseTarget>(),
@@ -47,7 +47,7 @@ export function logWorkout() {
         completedExercises.push(completedExercise);
     }
 
-    fetch(`${serverUrl}/workout/`, {
+    fetch(`${PUBLIC_SERVER_URL}/workout/`, {
         method: "POST",
         headers: { Authorization: getAuthorizationHeader(), 'Content-Type': 'application/json' },
         body: JSON.stringify({ date, duration, exercises: completedExercises, }),

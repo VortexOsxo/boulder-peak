@@ -1,5 +1,5 @@
 import { goto } from '$app/navigation';
-import { serverUrl } from '../../env';
+import { PUBLIC_SERVER_URL } from '$env/static/public';
 
 export function checkAuth() {
     const token = sessionStorage.getItem("auth_token");
@@ -12,7 +12,7 @@ export function getAuthorizationHeader() {
 }
 
 export async function attemptLogin(username: string, password: string) {
-    const response = await fetch(`${serverUrl}/auth/login`, {
+    const response = await fetch(`${PUBLIC_SERVER_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json", },
         body: JSON.stringify({ username, password }),
@@ -28,7 +28,7 @@ export async function attemptLogin(username: string, password: string) {
 }
 
 export async function attemptSignUp(username: string, password: string) {
-    const response = await fetch(`${serverUrl}/auth/signup`, {
+    const response = await fetch(`${PUBLIC_SERVER_URL}/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json", },
         body: JSON.stringify({ username, password }),
