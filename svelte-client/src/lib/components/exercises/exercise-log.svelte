@@ -4,7 +4,7 @@
     import { oneRepMax } from "$lib/utils/orm";
 </script>
 
-<div class="p-4 rounded bg-secondary-background flex flex-col text-main-text">
+<div class="p-4 rounded-lg bg-secondary-background flex flex-col text-main-text">
     <h1 class="text-title-text">{name}</h1>
     <h3>{formatDateWithDay(log.date)}</h3>
 
