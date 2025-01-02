@@ -2,8 +2,10 @@
     // @ts-nocheck
     import { goto } from "$app/navigation";
     import { formatDateWithHour } from "$lib/utils/formats";
+    import { idToName } from "$lib/utils/id-to-name";
     import { oneRepMax } from "$lib/utils/orm";
     import { onMount } from "svelte";
+    import ExerciseLog from "../exercises/exercise-log.svelte";
 
     let { workout } = $props();
 </script>
@@ -14,20 +16,9 @@
         <p>{workout.duration} seconds</p>
         <p>{workout.exercises.length} exercises:</p>
 
-        {#each workout.exerformatDateWithHoutxercise}
-            <div class="ml-4">
-                <p>{idToName(exercise.id)}</p>
-                {#if exercise.sets.length}
-                    <p>
-                        1 rep max: {oneRepMax(
-                            exercise.sets[0].weight,
-                            exercise.sets[0].reps,
-                        ).toFixed(1)} lbs
-                    </p>
-                {/if}
-                {#each exercise.sets as set}
-                    <p class="ml-8">{set.reps} reps at {set.weight} lbs</p>
-                {/each}
+        {#each workout.exercises as exercise}
+            <div class="mb-4">
+                <ExerciseLog log={exercise} name={idToName(exercise.id)} />
             </div>
         {/each}
     </div>

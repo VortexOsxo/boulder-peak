@@ -5,7 +5,7 @@
 </script>
 
 <div class="p-4 rounded bg-secondary-background flex flex-col text-main-text">
-    <h3>{name}</h3>
+    <h1 class="text-title-text">{name}</h1>
     <h3>{formatDateWithDay(log.date)}</h3>
 
     <div class="flex flex-col">
