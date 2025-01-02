@@ -1,8 +1,9 @@
 <script>
-    import { workoutState, initializeSets, addSet } from "$lib/stores/workout";
+    import { workoutState, initializeSets, addSet } from "$lib/stores/workout/workout";
     import { Checkbox } from "flowbite-svelte";
     import { onDestroy } from "svelte";
     import { get } from "svelte/store";
+    import AccentButton from "../ui/accent-button.svelte";
 
     const { currentExercise } = workoutState;
     let sets = initializeSets(get(currentExercise));
@@ -22,7 +23,7 @@
 </script>
 
 <div class="flex flex-col items-center">
-    <p class="text-title-text">{$currentExercise.name}</p>
+    <p class="text-title-text">{$currentExercise.exercise.name}</p>
     {#each sets as set, index}
         <div class="flex items-center mb-4">
             <p class="mr-4 text-title-text">Set {index + 1}</p>
@@ -46,10 +47,7 @@
         </div>
     {/each}
 
-    <button
-        class="bg-accent text-white px-4 py-2 rounded"
-        onclick={handleAddSet}
-    >
-        Add Set
-    </button>
+    <AccentButton onclick={handleAddSet}>
+        AddSet
+    </AccentButton>
 </div>

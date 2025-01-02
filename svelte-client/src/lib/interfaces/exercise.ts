@@ -1,8 +1,13 @@
 export interface Exercise {
+    id: string;
     name: string;
+    primary: string;
+    secondary: string[];
+}
+
+export interface ExerciseTarget {
+    exercise: Exercise
     sets: number;
     reps: number;
     weight: number;
 }
-
-export const defaultExercise: Exercise = {name: "", reps: 0, sets: 0, weight: 0};

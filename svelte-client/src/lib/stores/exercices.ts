@@ -1,21 +1,29 @@
 import type { Exercise } from '$lib/interfaces/exercise';
-import { get, writable } from 'svelte/store';
+import { writable } from 'svelte/store';
+import { getAuthorizationHeader } from './authentication';
+import { PUBLIC_SERVER_URL } from '$env/static/public';
 
-export const selectedExercises = new Set<string>();
+export const exercises = writable<Exercise[]>([]);
 
-export const exercises = writable<Exercise[]>([
-    { name: "Dumbbell Curl", reps: 10, sets: 3, weight: 10 },
-    { name: "Pull Up", reps: 10, sets: 3, weight: 0 }
-]);
-
-export function addExerciseByName(exerciseName: string) {
-    if (get(exercises).find(exercise => exercise.name === exerciseName)) return; 
-    const exercise = { name: exerciseName, reps: 10, sets: 3, weight: 50 };
-    exercises.update(exerciseList => [...exerciseList, exercise]);
+export function fetchExerciseData() {
+    fetch(`${PUBLIC_SERVER_URL}/exercise`)
+        .then(response => response.json()).then(exercises.set);
 }
 
-export function updateExercisesWithSelected(selectedExercises: Set<string>) {
-    exercises.update(exercises => exercises.filter(exercise => selectedExercises.has(exercise.name)));
-
-    selectedExercises.forEach(exerciseName => addExerciseByName(exerciseName));
+export async function fetchExercise(id: string) {
+    const response = await fetch(`${PUBLIC_SERVER_URL}/exercise/${id}`);
+    return await response.json();
 }
+
+export async function fetchExerciseLogs(id: string) {
+    const response = await fetch(`${PUBLIC_SERVER_URL}/exercise/${id}/logs`, {
+        method: 'GET',
+        headers: {
+            Authorization: getAuthorizationHeader(),
+            'Content-Type': 'application/json'
+        }
+    });
+    return await response.json();
+}
+
+fetchExerciseData();

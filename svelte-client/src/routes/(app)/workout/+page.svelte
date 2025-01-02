@@ -1,41 +1,29 @@
 <script>
-    import ExerciseList from "$lib/components/exercise-list.svelte";
-    import { workoutState, logWorkout } from "$lib/stores/workout";
-    import WorkoutSession from "$lib/components/workout-session/workout-session.svelte";
-    import { exercises } from "$lib/stores/exercices";
-    import { get } from "svelte/store";
     import { goto } from "$app/navigation";
+    import ExerciseList from "$lib/components/exercise-list.svelte";
+    import AccentButton from "$lib/components/ui/accent-button.svelte";
+    import SelectedWorkoutHeader from "$lib/components/workout-preparation/selected-workout-header.svelte";
+    import { workoutState } from "$lib/stores/workout/workout";
+    import { workoutTargets } from "$lib/stores/workout/workout-schema";
+    import { startTimer } from "$lib/stores/workout/workout-timer";
+    import { get } from "svelte/store";
 
     function startWorkout() {
-        workoutState.inWorkout = true;
-        let exercisesArray = get(exercises);
+        startTimer();
+
+        let exercisesArray = get(workoutTargets);
         if (exercisesArray.length > 0)
             workoutState.currentExercise.set(exercisesArray[0]);
+        goto("/workout/session");
     }
-
-    function stopWorkout() {
-        workoutState.inWorkout = false;
-        logWorkout();
-        goto("history");
-    }
-
 </script>
 
-{#if !workoutState.inWorkout}
-    <ExerciseList />
+<SelectedWorkoutHeader />
+<ExerciseList />
 
-    <button
-        class="fixed bottom-32 left-1/2 transform -translate-x-1/2 z-25 bg-accent text-black px-4 py-2 rounded"
-        onclick={startWorkout}
-    >
-        Start Workout
-    </button>
-{:else}
-    <WorkoutSession />
-    <button
-        class="fixed bottom-32 left-1/2 transform -translate-x-1/2 z-25 bg-accent text-black px-4 py-2 rounded"
-        onclick={stopWorkout}
-    >
-        Complete Workout
-    </button>
-{/if}
+<AccentButton
+    onclick={startWorkout}
+    tailwind="fixed bottom-32 left-1/2 transform -translate-x-1/2 z-25"
+>
+    Start Workout
+</AccentButton>
