@@ -1,1 +1,2 @@
 from .exercise_service import ExerciseService
+from .workout_service import WorkoutService

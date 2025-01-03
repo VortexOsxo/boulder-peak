@@ -1,7 +1,6 @@
 from flask import Blueprint, jsonify, g
-from ..services import ExerciseService
+from ..services import ExerciseService, WorkoutService
 from .auth import login_required
-from flaskr.db import get_db
 
 exercise_bp = Blueprint('exercise', __name__, url_prefix='/exercise')
 
@@ -18,9 +17,7 @@ def get_exercise_by_id(id):
 @exercise_bp.route("/<id>/logs", methods=["GET"])
 @login_required
 def get_exercise_logs(id):
-    db = get_db()
-    workouts_collection = db['workouts']
-    workouts = list(workouts_collection.find({'user_id': g.user_id}, {'_id': 0}))
+    workouts = WorkoutService.get_workouts(g.user_id)
     
     logs = []
     for workout in workouts:

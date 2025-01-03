@@ -3,7 +3,7 @@ import jwt
 from flask import Blueprint, g, request, jsonify, current_app
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime, timedelta
-from flaskr.db import get_db
+from flaskr.db import get_collection
 from pymongo.errors import DuplicateKeyError
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/auth')
@@ -32,8 +32,7 @@ def signup():
     username = data.get('username')
     password = data.get('password')
 
-    db = get_db()
-    users_collection = db['users']
+    users_collection = get_collection('users')
 
     try:
         users_collection.insert_one({
@@ -52,8 +51,7 @@ def login():
     username = data.get('username')
     password = data.get('password')
 
-    db = get_db()
-    users_collection = db['users']
+    users_collection = get_collection('users')
     user = users_collection.find_one({"username": username})
 
     if user is None:

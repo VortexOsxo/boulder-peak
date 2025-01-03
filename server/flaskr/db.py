@@ -7,8 +7,11 @@ from env import mongo_username, mongo_password
 def get_db():
     if 'db' not in g:
         _create_db()
-
     return g.db
+
+def get_collection(collection_name):
+    db = get_db()
+    return db[collection_name]
 
 def _create_db():
     uri = f"mongodb+srv://{mongo_username}:{mongo_password}@cluster0.t8rhv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
