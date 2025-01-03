@@ -3,7 +3,7 @@
     import ExerciseList from "$lib/components/exercise-list.svelte";
     import AccentButton from "$lib/components/ui/accent-button.svelte";
     import SelectedWorkoutHeader from "$lib/components/workout-preparation/selected-workout-header.svelte";
-    import { workoutState } from "$lib/stores/workout/workout";
+    import { currentExercise } from "$lib/stores/workout/workout";
     import { workoutTargets } from "$lib/stores/workout/workout-schema";
     import { startTimer } from "$lib/stores/workout/workout-timer";
     import { get } from "svelte/store";
@@ -13,7 +13,7 @@
 
         let exercisesArray = get(workoutTargets);
         if (exercisesArray.length > 0)
-            workoutState.currentExercise.set(exercisesArray[0]);
+            currentExercise.set(exercisesArray[0]);
         goto("/workout/session");
     }
 </script>
