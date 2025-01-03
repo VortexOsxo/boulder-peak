@@ -1,1 +1,3 @@
 from .exercise_service import ExerciseService
+from .workout_service import WorkoutService
+from .climbing_drill_service import ClimbingDrillService

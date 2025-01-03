@@ -5,10 +5,8 @@ import { getAuthorizationHeader } from "../authentication";
 import { stopTimer } from "./workout-timer";
 import { PUBLIC_SERVER_URL } from "$env/static/public";
 
-export const workoutState = {
-    currentExercise: writable<ExerciseTarget>(),
-};
 
+export const currentExercise = writable<ExerciseTarget>();
 let completedSets = new Map<string, Set[]>();
 
 export function initializeSets(target: ExerciseTarget): Set[] {

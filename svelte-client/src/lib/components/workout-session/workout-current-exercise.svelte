@@ -1,11 +1,10 @@
 <script>
-    import { workoutState, initializeSets, addSet } from "$lib/stores/workout/workout";
+    import { currentExercise, initializeSets, addSet } from "$lib/stores/workout/workout";
     import { Checkbox } from "flowbite-svelte";
     import { onDestroy } from "svelte";
     import { get } from "svelte/store";
     import AccentButton from "../ui/accent-button.svelte";
 
-    const { currentExercise } = workoutState;
     let sets = initializeSets(get(currentExercise));
 
     const unsubscribe = currentExercise.subscribe((value) => {

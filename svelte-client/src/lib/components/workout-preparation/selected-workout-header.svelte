@@ -5,6 +5,7 @@
         loadWorkoutSchema,
         saveWorkoutSchema,
         workoutSchemas,
+        workoutName,
     } from "$lib/stores/workout/workout-schema";
     import { onMount } from "svelte";
     import AccentButton from "../ui/accent-button.svelte";
@@ -26,7 +27,7 @@
 <div
     class="p-4 rounded mb-4 bg-secondary-background flex justify-between items-center"
 >
-    <h1 class="text-xl font-bold text-title-text">Default Workout</h1>
+    <h1 class="text-xl font-bold text-title-text">{$workoutName}</h1>
     <button class="text-accent text-3xl" onclick={() => (visible = true)}>
         &#8230
     </button>

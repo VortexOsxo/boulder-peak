@@ -8,5 +8,5 @@
     authFunc={attemptLogin}
     redirect="/signup"
     redirectMessage="No account ? Sign up"
-    succesRedirect="/home"
+    succesRedirect="/workout"
 />

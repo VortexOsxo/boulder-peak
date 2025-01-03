@@ -5,12 +5,18 @@ import { PUBLIC_SERVER_URL } from "$env/static/public";
 import type { WorkoutSchema } from "$lib/interfaces/workout-schema";
 import { exercises } from "../exercices";
 
+export const workoutName = writable<string>("Default Workout");
 export const workoutTargets = writable<ExerciseTarget[]>([]);
 
-export function addExercise(exercise: Exercise) {
+export async function addExercise(exercise: Exercise) {
     if (get(workoutTargets).find(target => target.exercise === exercise)) return;
-
     workoutTargets.update(exerciseList => [...exerciseList, { exercise, sets: 3, reps: 8, weight: 50 }]);
+
+    let lastTarget = await getLastTarget(exercise.id);
+
+    workoutTargets.update(exerciseList => [
+        ...(exerciseList).filter((t) => t.exercise.id !== exercise.id), { exercise, ...lastTarget }
+    ]);
 }
 
 export function updateExercises(selectedExercises: Set<Exercise>) {
@@ -41,13 +47,31 @@ export function fetchWorkoutSchema() {
     }).then((response) => response.json()).then(workoutSchemas.set);
 }
 
-export function loadWorkoutSchema(schema: WorkoutSchema) {
+export async function loadWorkoutSchema(schema: WorkoutSchema) {
+    workoutName.set(schema.name);
+
     const exercisesMap = new Map();
     get(exercises).forEach((exercise) => exercisesMap.set(exercise.id, exercise));
 
     const targets: ExerciseTarget[] = schema.exercises
         .map((exercisesId) => exercisesMap.get(exercisesId))
-        .map((exercise) => { return { exercise, sets: 3, reps: 8, weight: 50 }});
-    
+        .map((exercise) => { return { exercise, sets: 3, reps: 12, weight: 50 } });
+
     workoutTargets.set(targets);
+
+    const updatedTargets = await Promise.all(targets.map(async (target) => {
+        const lastTarget = await getLastTarget(target.exercise.id);
+        return { ...target, ...lastTarget };
+    }));
+
+    workoutTargets.set(updatedTargets);
+}
+
+async function getLastTarget(exerciseId: string) {
+    const response = await fetch(`${PUBLIC_SERVER_URL}/exercise/${exerciseId}/last-target`, {
+        method: "GET",
+        headers: { Authorization: getAuthorizationHeader() },
+    });
+
+    return await response.json();
 }

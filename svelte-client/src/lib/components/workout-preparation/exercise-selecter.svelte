@@ -1,5 +1,5 @@
 <script>
-    import { get } from "svelte/store";
+    import { get, writable } from "svelte/store";
     import { Checkbox } from "flowbite-svelte";
     import { exercises } from "$lib/stores/exercices";
     import MuscleFilterSelection from "./muscle-filter-selection.svelte";
@@ -16,18 +16,18 @@
 
     let { closeCallback } = $props();
 
-    let selectedExercises = new Set();
+    let selectedExercises = writable(new Set());
 
-    selectedExercises.clear();
-    get(workoutTargets).forEach((target) =>
-        selectedExercises.add(target.exercise),
-    );
+    selectedExercises.set(new Set(get(workoutTargets).map((target) => target.exercise)));
 
     // @ts-ignore
     function toggleSelection(exercise) {
-        selectedExercises.has(exercise)
-            ? selectedExercises.delete(exercise)
-            : selectedExercises.add(exercise);
+        selectedExercises.update((selectedExercises) => {
+            selectedExercises.has(exercise)
+                ? selectedExercises.delete(exercise)
+                : selectedExercises.add(exercise);
+            return selectedExercises;
+        });
     }
 
     let filteredExerciseData = $derived(
@@ -39,6 +39,12 @@
                 (!$muscleFilter || $muscleFilter === exercise.primary),
         ),
     );
+
+    function close() {
+        muscleFilter.set("");
+        searchFilter.set("");
+        closeCallback();
+    }
 </script>
 
 <div class="overflow-y-auto h-full no-scrollbar">
@@ -62,7 +68,7 @@
             </h3>
             <Checkbox
                 class="m-4"
-                checked={selectedExercises.has(exercise)}
+                checked={$selectedExercises.has(exercise)}
                 on:change={() => toggleSelection(exercise)}
             />
         </div>
@@ -76,14 +82,14 @@
 <div class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-25 flex gap-4">
     <AccentButton
         onclick={() => {
-            updateExercises(selectedExercises);
-            closeCallback();
+            updateExercises($selectedExercises);
+            close();
         }}
     >
         Select
     </AccentButton>
 
-    <DefaultButton tailwind="bg-secondary-background" onclick={closeCallback}
+    <DefaultButton tailwind="bg-secondary-background" onclick={close}
         >Cancel</DefaultButton
     >
 </div>
