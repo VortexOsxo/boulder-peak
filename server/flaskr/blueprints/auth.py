@@ -20,7 +20,7 @@ def load_logged_in_user():
 
     try:
         data = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=["HS256"])
-    except jwt.ExpiredSignatureError:
+    except Exception:
         return
 
     g.user_id = data['user_id']
