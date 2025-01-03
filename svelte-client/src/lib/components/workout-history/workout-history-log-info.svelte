@@ -8,6 +8,13 @@
     import ExerciseLog from "../exercises/exercise-log.svelte";
 
     let { workout } = $props();
+
+    function getLog(exercise) {
+        return {
+            name: idToName(exercise.id),
+            ...exercise,
+        };
+    }
 </script>
 
 {#if workout}
@@ -18,7 +25,7 @@
 
         {#each workout.exercises as exercise}
             <div class="mb-4">
-                <ExerciseLog log={exercise} name={idToName(exercise.id)} />
+                <ExerciseLog log={getLog(exercise)} />
             </div>
         {/each}
     </div>
