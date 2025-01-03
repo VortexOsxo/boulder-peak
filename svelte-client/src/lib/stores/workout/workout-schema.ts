@@ -5,6 +5,7 @@ import { PUBLIC_SERVER_URL } from "$env/static/public";
 import type { WorkoutSchema } from "$lib/interfaces/workout-schema";
 import { exercises } from "../exercices";
 
+export const workoutName = writable<string>("Default Workout");
 export const workoutTargets = writable<ExerciseTarget[]>([]);
 
 export async function addExercise(exercise: Exercise) {
@@ -47,6 +48,8 @@ export function fetchWorkoutSchema() {
 }
 
 export async function loadWorkoutSchema(schema: WorkoutSchema) {
+    workoutName.set(schema.name);
+
     const exercisesMap = new Map();
     get(exercises).forEach((exercise) => exercisesMap.set(exercise.id, exercise));
 

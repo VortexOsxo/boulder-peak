@@ -9,3 +9,7 @@
 {#each $workoutTargets as exercise}
 	<ExerciseHeader target={exercise} />
 {/each}
+
+{#if !$workoutTargets.length}
+	<p class="text-center text-title-text">Select some exercises to start a workout</p>
+{/if}

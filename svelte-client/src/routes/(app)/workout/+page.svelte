@@ -6,14 +6,21 @@
     import { currentExercise } from "$lib/stores/workout/workout";
     import { workoutTargets } from "$lib/stores/workout/workout-schema";
     import { startTimer } from "$lib/stores/workout/workout-timer";
-    import { get } from "svelte/store";
+    import { derived, get } from "svelte/store";
+
+    let color = derived(workoutTargets, ($workoutTargets) => {
+        if ($workoutTargets.length) {
+            return "bg-accent";
+        }
+        return "bg-secondary-background";
+    });
 
     function startWorkout() {
-        startTimer();
-
         let exercisesArray = get(workoutTargets);
-        if (exercisesArray.length > 0)
-            currentExercise.set(exercisesArray[0]);
+        if (!exercisesArray.length) return
+
+        startTimer();
+        currentExercise.set(exercisesArray[0]);
         goto("/workout/session");
     }
 </script>
@@ -23,7 +30,7 @@
 
 <AccentButton
     onclick={startWorkout}
-    tailwind="fixed bottom-32 left-1/2 transform -translate-x-1/2 z-25"
+    tailwind="{$color} fixed bottom-32 left-1/2 transform -translate-x-1/2 z-25"
 >
     Start Workout
 </AccentButton>
