@@ -19,7 +19,7 @@ class ExerciseService:
         workouts = WorkoutService.get_workouts(user_id)
         
         logs = []
-        for workout in workouts:
+        for workout in reversed(workouts):
             for exercise in workout['exercises']:
                 if exercise['id'] == exercise_id:
                     logs.append({ 'date': workout['date'], 'sets': exercise['sets'] })
@@ -29,7 +29,7 @@ class ExerciseService:
     def get_exercise_last_target(user_id: str, exercise_id: str):
         workouts = WorkoutService.get_workouts(user_id)
         
-        for workout in workouts:
+        for workout in reversed(workouts):
             for exercise in workout['exercises']:
                 if exercise['id'] == exercise_id:
                     return { 'sets': len(exercise['sets']), 'reps': exercise['sets'][0]['reps'], 'weight': exercise['sets'][0]['weight'] }
