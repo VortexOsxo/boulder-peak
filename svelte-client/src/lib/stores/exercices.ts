@@ -10,13 +10,15 @@ export async function fetchExercises() {
     exercises.set(await response.json());
 }
 
-export async function fetchExercise(id: string) {
-    const response = await fetch(`${PUBLIC_SERVER_URL}/exercise/${id}`);
+export async function fetchExercise(id: string, fetchFunc: any = null) {
+    fetchFunc ??= fetch;
+    const response = await fetchFunc(`${PUBLIC_SERVER_URL}/exercise/${id}`);
     return await response.json();
 }
 
-export async function fetchExerciseLogs(id: string) {
-    const response = await fetch(`${PUBLIC_SERVER_URL}/exercise/${id}/logs`, {
+export async function fetchExerciseLogs(id: string, fetchFunc: any = null) {
+    fetchFunc ??= fetch;
+    const response = await fetchFunc(`${PUBLIC_SERVER_URL}/exercise/${id}/logs`, {
         method: 'GET',
         headers: {
             Authorization: getAuthorizationHeader(),
