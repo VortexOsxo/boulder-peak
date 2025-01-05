@@ -27,7 +27,7 @@ We suggest using a mobile device to visit the application, as it was designed sp
 
 ## Backend
 
-The backend is built with Flask and provides RESTful APIs for user authentication, workout tracking, and climbing drills.
+Simple Flask backend with almost RESTful APIs for user authentication, workout tracking, etc.
 
 ### Setup
 
@@ -68,7 +68,7 @@ You can also run the backend using Docker:
 
 ## Frontend
 
-The frontend is built with Svelte and uses Tailwind CSS for styling.
+A simple and elegant frontend built with Svelte and Tailwind CSS.
 
 ### Setup
 
