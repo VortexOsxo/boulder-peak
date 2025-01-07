@@ -1,7 +1,6 @@
 <script>
     import Modal from "$lib/components/ui/modal.svelte";
     import {
-        fetchWorkoutSchema,
         loadWorkoutSchema,
         saveWorkoutSchema,
         workoutSchemas,
@@ -20,8 +19,6 @@
         savedName = "";
         visible = false;
     }
-
-    onMount(fetchWorkoutSchema);
 </script>
 
 <div

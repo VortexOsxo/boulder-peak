@@ -1,6 +1,6 @@
-import { getRandomClimbingDrill } from "$lib/stores/climbing_drills";
+import { getRandomDrill } from "$lib/services/climbing-drills";
 
-export async function load() {
-    let drill = await getRandomClimbingDrill();
+export function load() {
+    let drill = getRandomDrill();
     return { drill };
 }

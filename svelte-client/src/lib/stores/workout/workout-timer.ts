@@ -1,7 +1,7 @@
 import { get, writable } from "svelte/store";
 
 export const workoutTimer = writable<number>(0);
-let timerIntervalId: number = 0;
+let timerIntervalId: ReturnType<typeof setInterval>;
 
 export function startTimer() {
     workoutTimer.set(0);

@@ -1,1 +1,0 @@
-export { checkAuth, getAuthorizationHeader } from './stores/authentication';

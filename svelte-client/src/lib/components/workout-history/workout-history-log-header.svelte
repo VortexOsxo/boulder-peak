@@ -1,7 +1,6 @@
 <script>
     // @ts-nocheck
     import { goto } from "$app/navigation";
-    import { selectedLog } from "$lib/stores/logs";
 
     let { workout } = $props();
 
@@ -17,8 +16,7 @@
     }
 
     function selectLog() {
-        selectedLog.set(workout);
-        goto('history/workout');
+        goto('history/workout/' + workout.id);
     }
 
 </script>

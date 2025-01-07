@@ -3,19 +3,12 @@
 
     import WorkoutHistoryLogHeader from "$lib/components/workout-history/workout-history-log-header.svelte";
     import WorkoutHistoryLogInfo from "$lib/components/workout-history/workout-history-log-info.svelte";
-    import { fetchlogs, logs, selectedLog } from "$lib/stores/logs";
     import { getTotalVolume, getTotalWorkouts } from "$lib/stores/stats";
     import { onMount } from "svelte";
     import { get } from "svelte/store";
 
-    let totalVolume = $state(0);
-    let totalWorkouts = $state(0);
-
-    onMount(() => {
-        fetchlogs();
-        getTotalVolume().then((vol) => (totalVolume = vol));
-        getTotalWorkouts().then((workouts) => (totalWorkouts = workouts));
-    });
+    let { data } = $props();
+    const { workouts, totalVolume, totalWorkouts } = data;
 
 </script>
 
@@ -24,11 +17,11 @@
     <h1> Workouts: {totalWorkouts} </h1>
 </div>
 
-{#if !$logs.length}
+{#if !workouts.length}
     <p>No logs found</p>
 {:else}
     <h1 class="text-main-text p-4">Past Workouts</h1>
-    {#each $logs as workout}
+    {#each workouts as workout}
         <WorkoutHistoryLogHeader {workout} />
     {/each}
 {/if}
