@@ -1,4 +1,4 @@
-import { completedWorkouts } from "$lib/stores/workout/completed-workouts";
+import { workouts } from "$lib/stores/workout/workouts";
 import { get } from "svelte/store";
 
 const exercises = [
@@ -181,10 +181,8 @@ export function getExercise(id: string) {
 }
 
 export function getExerciseLogs(exerciseId: string) {
-    const workouts: any[] = get(completedWorkouts);
-
     const logs: any[] = [];
-    for (const workout of workouts.reverse()) {
+    for (const workout of get(workouts).reverse()) {
         for (const exercise of workout.exercises) {
             if (exercise.id === exerciseId) logs.push({ date: workout.date, sets: exercise.sets });
         }
@@ -194,9 +192,7 @@ export function getExerciseLogs(exerciseId: string) {
 }
 
 export function getExerciseLastTarget(exerciseId: string) {
-    const workouts: any[] = get(completedWorkouts);
-
-    for (const workout of workouts.reverse()) {
+    for (const workout of get(workouts).reverse()) {
         for (const exercise of workout.exercises) {
             if (exercise.id === exerciseId)
                 return { sets: exercise.sets.length, reps: exercise.sets[0].reps, weight: exercise.sets[0].weight };

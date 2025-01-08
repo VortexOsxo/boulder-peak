@@ -3,9 +3,10 @@
     import { goto } from "$app/navigation";
     import AccentButton from "$lib/components/ui/accent-button.svelte";
     import { workoutSession } from "$lib/stores/workout/workout-session";
+    import { workouts } from "$lib/stores/workout/workouts";
 
     function stopWorkout() {
-        workoutSession.logWorkout();
+        workoutSession.logWorkout().then(workouts.fetch);
         goto("/history");
     }
 </script>

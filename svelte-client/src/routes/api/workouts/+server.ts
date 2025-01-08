@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit';
 import { connectToDatabase } from '$lib/database/db';
-import { fetchWorkouts } from '$lib/services/workouts.js';
+import { fetchWorkouts } from '$lib/services/server/workouts.js';
 
 export async function POST({ request, locals }) {
     const { date, duration, exercises } = await request.json();

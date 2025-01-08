@@ -1,4 +1,4 @@
-import { getLog } from '$lib/stores/workout/completed-workouts.js';
+import { getLog } from '$lib/stores/workout/workouts.js';
 
 export async function load({params}) {
     const { id } = params;

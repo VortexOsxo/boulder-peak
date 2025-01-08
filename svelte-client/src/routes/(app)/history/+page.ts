@@ -1,14 +1,9 @@
-import { completedWorkouts } from "$lib/stores/workout/completed-workouts";
+import { workouts } from "$lib/stores/workout/workouts";
 import { get } from "svelte/store";
 
 export async function load() {
-    let workouts = get(completedWorkouts).map((workout: any) => {
-        const { _id, ...w } = { id: String(workout._id), ...workout };
-        return w;
-    });
-
     let totalVolume = 0;
-    workouts.forEach(workout => {
+    get(workouts).forEach(workout => {
         totalVolume += workout.exercises.reduce(
             (acc: number, exercise: any) => acc + exercise.sets.reduce(
                 (acc: number, set: any) => acc + set.weight * set.reps, 0
@@ -16,7 +11,7 @@ export async function load() {
         );
     });
 
-    let totalWorkouts = workouts.length;
+    let totalWorkouts = get(workouts).length;
 
     return { workouts, totalVolume, totalWorkouts };
 }

@@ -1,8 +1,8 @@
 import { connectToDatabase } from '$lib/database/db';
-import { verifyPassword } from '$lib/services/password-hashing';
+import { verifyPassword } from '$lib/services/server/password-hashing';
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from '../$types';
-import { createToken } from '$lib/services/jwt';
+import { createToken } from '$lib/services/server/jwt';
 
 export const actions = {
     login: async (event) => {

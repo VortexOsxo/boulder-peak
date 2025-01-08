@@ -1,5 +1,5 @@
 import { connectToDatabase } from '$lib/database/db';
-import { hashPassword } from '$lib/services/password-hashing';
+import { hashPassword } from '$lib/services/server/password-hashing';
 import type { Actions } from '../$types';
 import { fail, redirect } from '@sveltejs/kit';
 

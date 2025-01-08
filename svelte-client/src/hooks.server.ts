@@ -1,4 +1,4 @@
-import { validateToken } from '$lib/services/jwt';
+import { validateToken } from '$lib/services/server/jwt';
 import { type Handle } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
