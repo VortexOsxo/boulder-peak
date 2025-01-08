@@ -3,24 +3,16 @@
     import ExerciseList from "$lib/components/exercise-list.svelte";
     import AccentButton from "$lib/components/ui/accent-button.svelte";
     import SelectedWorkoutHeader from "$lib/components/workout-preparation/selected-workout-header.svelte";
-    import { currentExercise } from "$lib/stores/workout/workout";
-    import { workoutTargets } from "$lib/stores/workout/workout-schema";
-    import { startTimer } from "$lib/stores/workout/workout-timer";
-    import { derived, get } from "svelte/store";
+    import { get } from "svelte/store";
+    import { workoutDetails } from "$lib/stores/workout/workout-details";
+    import { startWorkoutSession } from "$lib/stores/workout/workout-session";
 
-    let color = derived(workoutTargets, ($workoutTargets) => {
-        if ($workoutTargets.length) {
-            return "bg-accent";
-        }
-        return "bg-secondary-background";
-    });
+    let canStart = workoutDetails.canStartWorkout;
 
     function startWorkout() {
-        let exercisesArray = get(workoutTargets);
-        if (!exercisesArray.length) return
+        if (!get(canStart)) return
 
-        startTimer();
-        currentExercise.set(exercisesArray[0]);
+        startWorkoutSession();
         goto("/workout/session");
     }
 </script>
@@ -30,7 +22,7 @@
 
 <AccentButton
     onclick={startWorkout}
-    tailwind="{$color} fixed bottom-32 left-1/2 transform -translate-x-1/2 z-25"
+    tailwind="{$canStart ? "bg-accent" :"bg-secondary-background" } fixed bottom-32 left-1/2 transform -translate-x-1/2 z-25"
 >
     Start Workout
 </AccentButton>

@@ -1,15 +1,17 @@
 <script lang="ts">
-	import { workoutTargets } from "$lib/stores/workout/workout-schema";
+	import { workoutDetails } from "$lib/stores/workout/workout-details";
 	import ExerciseHeader from "./exercise-header.svelte";
 	import ExerciseListHeader from "./exercise-list-header.svelte";
+
+	let targets = workoutDetails.targets;
 </script>
 
 <ExerciseListHeader />
 
-{#each $workoutTargets as exercise}
-	<ExerciseHeader target={exercise} />
+{#each $targets as target}
+	<ExerciseHeader {target} />
 {/each}
 
-{#if !$workoutTargets.length}
+{#if !$targets.length}
 	<p class="text-center text-title-text">Select some exercises to start a workout</p>
 {/if}

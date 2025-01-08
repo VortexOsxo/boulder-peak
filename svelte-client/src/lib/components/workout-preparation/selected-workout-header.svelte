@@ -1,18 +1,15 @@
 <script>
     import Modal from "$lib/components/ui/modal.svelte";
-    import {
-        loadWorkoutSchema,
-        saveWorkoutSchema,
-        workoutSchemas,
-        workoutName,
-    } from "$lib/stores/workout/workout-schema";
-    import { onMount } from "svelte";
+    import { loadWorkoutSchema, workoutDetails } from "$lib/stores/workout/workout-details";
+    import { workoutSchemas } from "$lib/stores/workout/workout-schemas";
     import AccentButton from "../ui/accent-button.svelte";
     import DefaultButton from "../ui/default-button.svelte";
 
     let visible = $state(false);
     let modalState = $state(0);
     let savedName = $state("");
+
+    let workoutName = workoutDetails.name;
 
     function close() {
         modalState = 0;
@@ -55,7 +52,7 @@
                 <AccentButton
                     tailwind="font-bold"
                     onclick={() => {
-                        saveWorkoutSchema(savedName);
+                        workoutDetails.saveWorkoutSchema(savedName);
                         close();
                     }}>Save Workout</AccentButton
                 >

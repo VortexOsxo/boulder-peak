@@ -1,15 +1,15 @@
 <script>
-    import { currentExercise } from "$lib/stores/workout/workout";
     import { derived } from "svelte/store";
+    import { workoutSession } from "$lib/stores/workout/workout-session";
 
     let { target } = $props();
 
     function selectExercise() {
-        currentExercise.set(target);
+        workoutSession.setExercise(target);
     }
 
     let colorClass = derived(
-        currentExercise,
+        workoutSession.currentExercise,
         ($currentExercise) => {
             if ($currentExercise.exercise.id === target.exercise.id) {
                 return "bg-accent text-black";

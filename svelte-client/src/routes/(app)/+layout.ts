@@ -1,6 +1,6 @@
 import { browser } from '$app/environment';
 import { completedWorkouts } from '$lib/stores/workout/completed-workouts.js';
-import { workoutSchemas } from '$lib/stores/workout/workout-schema.js';
+import { workoutSchemas } from '$lib/stores/workout/workout-schemas.js';
 
 export async function load({ fetch}) {
     if(!browser) return;

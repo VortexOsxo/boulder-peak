@@ -8,17 +8,14 @@
     } from "$lib/stores/workout/workout-creation";
     import AccentButton from "../ui/accent-button.svelte";
     import DefaultButton from "../ui/default-button.svelte";
-    import {
-        updateExercises,
-        workoutTargets,
-    } from "$lib/stores/workout/workout-schema";
+    import { workoutDetails } from "$lib/stores/workout/workout-details";
     import { getExercises } from "$lib/services/exercises";
 
     let { closeCallback } = $props();
 
     let selectedExercises = writable(new Set());
 
-    selectedExercises.set(new Set(get(workoutTargets).map((target) => target.exercise)));
+    selectedExercises.set(new Set(get(workoutDetails.targets).map((target) => target.exercise)));
 
     // @ts-ignore
     function toggleSelection(exercise) {
@@ -82,7 +79,7 @@
 <div class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-25 flex gap-4">
     <AccentButton
         onclick={() => {
-            updateExercises($selectedExercises);
+            workoutDetails.updateExercises($selectedExercises)
             close();
         }}
     >

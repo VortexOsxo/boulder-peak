@@ -3,7 +3,6 @@
 
     import WorkoutHistoryLogHeader from "$lib/components/workout-history/workout-history-log-header.svelte";
     import WorkoutHistoryLogInfo from "$lib/components/workout-history/workout-history-log-info.svelte";
-    import { getTotalVolume, getTotalWorkouts } from "$lib/stores/stats";
     import { onMount } from "svelte";
     import { get } from "svelte/store";
 

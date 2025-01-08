@@ -1,11 +1,11 @@
 <script>
-    import { logWorkout } from "$lib/stores/workout/workout";
     import WorkoutSession from "$lib/components/workout-session/workout-session.svelte";
     import { goto } from "$app/navigation";
     import AccentButton from "$lib/components/ui/accent-button.svelte";
+    import { workoutSession } from "$lib/stores/workout/workout-session";
 
     function stopWorkout() {
-        logWorkout();
+        workoutSession.logWorkout();
         goto("/history");
     }
 </script>

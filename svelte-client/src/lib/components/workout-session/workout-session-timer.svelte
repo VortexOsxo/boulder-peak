@@ -1,6 +1,8 @@
 <script>
-    import { workoutTimer } from "$lib/stores/workout/workout-timer";
+    import { workoutSession } from "$lib/stores/workout/workout-session";
     import { formatTimerTime } from "$lib/utils/timer";
+
+    let timer = workoutSession.timer
 </script>
 
-<p>{formatTimerTime($workoutTimer)}</p>
+<p>{formatTimerTime($timer)}</p>

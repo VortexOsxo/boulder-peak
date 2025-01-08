@@ -1,29 +1,16 @@
 <script>
-    import { currentExercise, initializeSets, addSet } from "$lib/stores/workout/workout";
     import { Checkbox } from "flowbite-svelte";
-    import { onDestroy } from "svelte";
-    import { get } from "svelte/store";
     import AccentButton from "../ui/accent-button.svelte";
+    import { workoutSession } from "$lib/stores/workout/workout-session";
 
-    let sets = initializeSets(get(currentExercise));
+    let currentExercise = workoutSession.currentExercise;
+    let currentSets = workoutSession.currentSets;
 
-    const unsubscribe = currentExercise.subscribe((value) => {
-        sets = initializeSets(value);
-    });
-
-    onDestroy(() => {
-        unsubscribe();
-    });
-
-    function handleAddSet() {
-        addSet(get(currentExercise));
-        sets = [...initializeSets(get(currentExercise))];
-    }
 </script>
 
 <div class="flex flex-col items-center">
     <p class="text-title-text">{$currentExercise.exercise.name}</p>
-    {#each sets as set, index}
+    {#each $currentSets as set, index}
         <div class="flex items-center mb-4">
             <p class="mr-4 text-title-text">Set {index + 1}</p>
             <label class="flex items-center">
@@ -46,7 +33,7 @@
         </div>
     {/each}
 
-    <AccentButton onclick={handleAddSet}>
+    <AccentButton onclick={workoutSession.addSet}>
         AddSet
     </AccentButton>
 </div>
