@@ -188,6 +188,8 @@ export function getExerciseLogs(exerciseId: string) {
         }
     }
 
+    console.log(logs);
+
     return logs;
 }
 
