@@ -1,10 +1,8 @@
 <script>
+    import SessionRestTimerModal from "../session/session-rest-timer-modal.svelte";
     import WorkoutCurrentExercise from "./workout-current-exercise.svelte";
     import WorkoutExercicesList from "./workout-exercices-list.svelte";
     import WorkoutSessionTimer from "./workout-session-timer.svelte";
-    import WorkoutTimerWindow from "./workout-timer-window.svelte";
-
-    let timerActive = false;
 </script>
 
 <h1>
@@ -15,6 +13,5 @@
 <WorkoutExercicesList />
 <WorkoutCurrentExercise />
 
-{#if timerActive} 
-    <WorkoutTimerWindow />
-{/if}
+<SessionRestTimerModal />
+

@@ -1,10 +1,17 @@
-<script>
+<script lang="ts">
     import { Checkbox } from "flowbite-svelte";
     import AccentButton from "../ui/accent-button.svelte";
     import { workoutSession } from "$lib/stores/workout/workout-session";
+    import { restTimer } from "$lib/stores/sessions/rest-timer";
+
 
     let currentExercise = workoutSession.currentExercise;
     let currentSets = workoutSession.currentSets;
+
+    function setChanged(value: boolean) {
+        if (!value) return;
+        restTimer.start();
+    }
 
 </script>
 
@@ -29,7 +36,7 @@
                 />
                 <span class="mr-2 text-title-text m-1"> reps </span>
             </label>
-            <Checkbox bind:checked={set.done} class="ml-4"></Checkbox>
+            <Checkbox bind:checked={set.done} on:change={() => setChanged(set.done)} class="ml-4"></Checkbox>
         </div>
     {/each}
 
