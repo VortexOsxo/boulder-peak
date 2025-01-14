@@ -2,7 +2,7 @@
 
 ## Overview
 
-Workout Tracker is a web application built to help users track their workouts. Its main goal is to enable people to log the exercises they perform, the weights used, and the number of repetitions. By doing so, users can continuously monitor their progress and ensure they’re increasing the load on their muscles, keeping their workouts on track for improvement.
+Boulder Peak is a web application built to help users track their workouts. Its main goal is to enable people to log the exercises they perform, the weights used, and the number of repetitions. By doing so, users can continuously monitor their progress and ensure they’re increasing the load on their muscles, keeping their workouts on track for improvement.
 
 ## Table of Contents
 
